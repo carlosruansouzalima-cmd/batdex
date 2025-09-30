@@ -34,8 +34,8 @@ final List<Bat> batdex = [
     description:
         "Maior dos Artibeus, alimenta-se de frutos grandes como figos e goiabas. Também pode consumir néctar e insetos, auxiliando na regeneração de florestas.",
     imagePath: "assets/images/artibeus_lituratus.jpg",
-    weight: "60–80 g",
-    wingspan: "40–50 cm",
+    weight: "53–88 g",
+    wingspan: "32–33 cm",
     habitat: "Florestas, áreas urbanas arborizadas",
     coloration: "Marrom-escuro com listras faciais claras",
   ),
