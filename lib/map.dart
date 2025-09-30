@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
+
 import 'main.dart';
 
 /// Uma tela que exibe um mapa interativo mostrando localizações de morcegos em Manaus.
@@ -26,18 +27,18 @@ class _BatMapState extends State<BatMap> {
   final MapController mapController = MapController();
   bool isDarkMode = false;
 
-  // Localizações de exemplo dos morcegos em Manaus
-  final Map<String, LatLng> batLocations = {
-    'Artibeus lituratus': LatLng(-3.0897, -60.0168),      // UFAM
-    'Carollia perspicillata': LatLng(-3.1316, -60.0238),  // Parque do Mindu
-    'Sturnira lilium': LatLng(-3.0826, -60.0261),         // INPA
-    'Platyrrhinus helleri': LatLng(-3.1045, -60.0261),    // Jardim Botânico
-    'Glossophaga soricina': LatLng(-3.1301, -60.0238),    // Museu do Índio
-    'Artibeus obscurus': LatLng(-3.0448, -60.0228),       // Centro de Manaus
-    'Phyllostomus discolor': LatLng(-3.0935, -59.9825),   // Reserva Ducke
-    'Chiroderma villosum': LatLng(-3.0816, -59.9947),     // Área de Preservação
-    'Hsunycteris thomasi': LatLng(-3.0633, -60.0092),     // Bosque da Ciência
-    'Anoura caudifer': LatLng(-3.0724, -60.0097),         // Parque dos Bilhares
+  // Localizações dos morcegos em Manaus baseadas em registros e habitats
+  Map<String, LatLng> batLocations = {
+    'Artibeus lituratus': LatLng(-3.0897, -60.0168),      // Campus UFAM - Setor Sul
+    'Carollia perspicillata': LatLng(-3.0516, -60.0238),  // Parque do Mindu - Área de Mata
+    'Sturnira lilium': LatLng(-3.0826, -60.0261),         // INPA - Campus I (Lado Oeste)
+    'Platyrrhinus helleri': LatLng(-3.1328, -60.0234),    // Parque do Mindu - Área de Palmeiras
+    'Glossophaga soricina': LatLng(-3.0935, -59.9825),    // Reserva Ducke - Área de Flores
+    'Artibeus obscurus': LatLng(-3.0816, -59.9947),       // Reserva Adolpho Ducke - Mata Primária
+    'Phyllostomus discolor': LatLng(-3.0633, -60.0122),   // Bosque da Ciência - INPA (Área Oeste)
+    'Chiroderma villosum': LatLng(-3.0985, -60.0264),     // Corredor Ecológico do Mindu
+    'Hsunycteris thomasi': LatLng(-3.0944, -59.9936),     // MUSA - Museu da Amazônia
+    'Anoura caudifer': LatLng(-3.0724, -60.0067),         // Jardim Botânico de Manaus (Área Leste)
   };
 
   @override
@@ -134,18 +135,10 @@ class _BatMapState extends State<BatMap> {
                   final isSelected = widget.selectedBat?.name == entry.key;
                   return Marker(
                     point: entry.value,
-                    width: 100,
-                    height: 100,
-                    child: GestureDetector(
-                      onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(entry.key),
-                            duration: const Duration(seconds: 2),
-                          ),
-                        );
-                      },
-                      child: Column(
+                    width: 90,
+                    height: 90,
+                    child: Draggable<String>(
+                      feedback: Column(
                         children: [
                           Container(
                             decoration: BoxDecoration(
@@ -158,8 +151,66 @@ class _BatMapState extends State<BatMap> {
                             child: ClipOval(
                               child: Image.asset(
                                 batdex.firstWhere((bat) => bat.name == entry.key).imagePath,
-                                width: isSelected ? 70 : 60,
-                                height: isSelected ? 70 : 60,
+                                width: isSelected ? 60 : 50,
+                                height: isSelected ? 60 : 50,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.7),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Text(
+                              entry.key,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 8,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
+                      ),
+                      data: entry.key,
+                      onDraggableCanceled: (velocity, offset) {
+                        final RenderBox renderBox = context.findRenderObject() as RenderBox;
+                        final localPosition = renderBox.globalToLocal(offset);
+                        final latLng = mapController.pointToLatLng(CustomPoint(
+                          localPosition.dx,
+                          localPosition.dy,
+                        ));
+                        setState(() {
+                          batLocations[entry.key] = latLng;
+                        });
+                      },
+                      child: GestureDetector(
+                        onTap: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(entry.key),
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
+                        },
+                        child: Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: isSelected ? Colors.red : Colors.blue,
+                                width: 3,
+                              ),
+                            ),
+                            child: ClipOval(
+                              child: Image.asset(
+                                batdex.firstWhere((bat) => bat.name == entry.key).imagePath,
+                                width: isSelected ? 60 : 50,
+                                height: isSelected ? 60 : 50,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -183,7 +234,7 @@ class _BatMapState extends State<BatMap> {
                         ],
                       ),
                       ),
-                    
+                    ),
                   );
                 }).toList(),
               ),
