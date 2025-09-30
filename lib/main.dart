@@ -1,122 +1,259 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+/// Modelo representando cada morcego da BatDex.
+class Bat {
+  final int id;
+  final String name;
+  final List<String> types;
+  final String description;
+  final String imagePath;
+  final String weight;
+  final String wingspan;
+  final String habitat;
+  final String coloration;
+
+  Bat({
+    required this.id,
+    required this.name,
+    required this.types,
+    required this.description,
+    required this.imagePath,
+    required this.weight,
+    required this.wingspan,
+    required this.habitat,
+    required this.coloration,
+  });
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+/// Lista completa da BatDex com 10 espécies.
+final List<Bat> batdex = [
+  Bat(
+    id: 1,
+    name: "Artibeus lituratus",
+    types: ["Dispersor"],
+    description:
+        "Maior dos Artibeus, alimenta-se de frutos grandes como figos e goiabas. Também pode consumir néctar e insetos, auxiliando na regeneração de florestas.",
+    imagePath: "assets/images/artibeus_lituratus.jpg",
+    weight: "60–80 g",
+    wingspan: "40–50 cm",
+    habitat: "Florestas, áreas urbanas arborizadas",
+    coloration: "Marrom-escuro com listras faciais claras",
+  ),
+  Bat(
+    id: 2,
+    name: "Carollia perspicillata",
+    types: ["Dispersor", "Polinizador"],
+    description:
+        "Generalista, alimenta-se principalmente de frutos do gênero Piper, mas também consome néctar e insetos. Resiliente em áreas urbanas e florestais.",
+    imagePath: "assets/images/carollia_perspicillata.jpg",
+    weight: "15–22 g",
+    wingspan: "28–35 cm",
+    habitat: "Florestas secundárias, bordas, áreas urbanas",
+    coloration: "Marrom-acinzentado uniforme",
+  ),
+  Bat(
+    id: 3,
+    name: "Sturnira lilium",
+    types: ["Dispersor"],
+    description:
+        "Especialista em frutos de Solanum. Machos possuem glândulas odoríferas nos ombros, usadas na reprodução.",
+    imagePath: "assets/images/sturnira_lilium.jpg",
+    weight: "18–25 g",
+    wingspan: "32–38 cm",
+    habitat: "Florestas úmidas e secas, bordas de mata",
+    coloration: "Marrom a cinza, coloração mais clara no ventre",
+  ),
+  Bat(
+    id: 4,
+    name: "Platyrrhinus helleri",
+    types: ["Dispersor"],
+    description:
+        "Pequeno morcego de listras brancas na face e dorso. Constrói abrigos com folhas de palmeira.",
+    imagePath: "assets/images/platyrrhinus_helleri.jpg",
+    weight: "12–20 g",
+    wingspan: "28–34 cm",
+    habitat: "Florestas tropicais e bordas de mata",
+    coloration: "Castanho com listras brancas marcantes",
+  ),
+  Bat(
+    id: 5,
+    name: "Glossophaga soricina",
+    types: ["Polinizador"],
+    description:
+        "Conhecido como Morcego Beija-Flor, possui língua longa adaptada para o néctar. Importante polinizador de várias espécies vegetais tropicais.",
+    imagePath: "assets/images/glossophaga_soricina.jpg",
+    weight: "9–12 g",
+    wingspan: "25–30 cm",
+    habitat: "Florestas, áreas urbanas com flores",
+    coloration: "Marrom-acinzentado com ventre mais claro",
+  ),
+  Bat(
+    id: 6,
+    name: "Artibeus obscurus",
+    types: ["Dispersor"],
+    description:
+        "Morcego frugívoro escuro, consome principalmente figos e frutos silvestres.",
+    imagePath: "assets/images/artibeus_obscurus.jpg",
+    weight: "45–65 g",
+    wingspan: "38–45 cm",
+    habitat: "Florestas úmidas, clareiras e bordas",
+    coloration: "Marrom a preto, uniforme",
+  ),
+  Bat(
+    id: 7,
+    name: "Phyllostomus discolor",
+    types: ["Polinizador", "Dispersor"],
+    description:
+        "Onívoro versátil, consome frutos, insetos, pólen e néctar. Vocalização complexa, comparável à de alguns primatas.",
+    imagePath: "assets/images/phyllostomus_discolor.jpg",
+    weight: "30–45 g",
+    wingspan: "35–40 cm",
+    habitat: "Florestas primárias e secundárias",
+    coloration: "Marrom pálido a acinzentado",
+  ),
+  Bat(
+    id: 8,
+    name: "Chiroderma villosum",
+    types: ["Dispersor"],
+    description:
+        "Granívoro e frugívoro, com olhos grandes. Vive em colônias pequenas e ajuda na dispersão de figos.",
+    imagePath: "assets/images/chiroderma_villosum.jpg",
+    weight: "15–25 g",
+    wingspan: "28–34 cm",
+    habitat: "Florestas tropicais densas",
+    coloration: "Castanho-acinzentado com ventre esbranquiçado",
+  ),
+  Bat(
+    id: 9,
+    name: "Hsunycteris thomasi",
+    types: ["Polinizador"],
+    description:
+        "Especializado em néctar, possui língua com papilas em forma de esponja. Também consome pequenos frutos e insetos.",
+    imagePath: "assets/images/hsunycteris_thomasi.jpg",
+    weight: "9–11 g",
+    wingspan: "24–28 cm",
+    habitat: "Florestas úmidas, próximo a flores noturnas",
+    coloration: "Marrom claro, focinho alongado",
+  ),
+  Bat(
+    id: 10,
+    name: "Anoura caudifer",
+    types: ["Polinizador"],
+    description:
+        "Morcego focinhudo, alimenta-se de néctar de diversas espécies vegetais, além de pólen e insetos.",
+    imagePath: "assets/images/anoura_caudifer.jpg",
+    weight: "10–14 g",
+    wingspan: "25–30 cm",
+    habitat: "Florestas úmidas e bordas de mata",
+    coloration: "Marrom-acinzentado com pelagem densa",
+  ),
+];
 
-  // This widget is the root of your application.
+/// Tela inicial da BatDex
+class BatDexApp extends StatelessWidget {
+  const BatDexApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      title: "BatDex",
+      theme: ThemeData.dark(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("BatDex - Morcegos da Amazônia"),
+          centerTitle: true,
+        ),
+        body: ListView.builder(
+          itemCount: batdex.length,
+          itemBuilder: (context, index) {
+            final bat = batdex[index];
+            return Card(
+              color: Colors.grey[900],
+              child: ListTile(
+                leading: Image.asset(
+                  bat.imagePath,
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                ),
+                title: Text(
+                  bat.name,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text("Tipo: ${bat.types.join(', ')}"),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => BatDetailScreen(bat: bat),
+                    ),
+                  );
+                },
+              ),
+            );
+          },
+        ),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+/// Tela de detalhes de cada morcego
+class BatDetailScreen extends StatelessWidget {
+  final Bat bat;
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  const BatDetailScreen({super.key, required this.bat});
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      appBar: AppBar(title: Text(bat.name)),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(bat.imagePath, height: 200),
+            SizedBox(height: 16),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              bat.name,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
+            Text("Tipo(s): ${bat.types.join(', ')}"),
+            SizedBox(height: 16),
+            Text(
+              bat.description,
+              style: TextStyle(fontSize: 16),
+              textAlign: TextAlign.justify,
+            ),
+            SizedBox(height: 20),
+            Divider(color: Colors.grey),
+            SizedBox(height: 10),
+            _buildStatRow("Peso médio", bat.weight),
+            _buildStatRow("Envergadura", bat.wingspan),
+            _buildStatRow("Habitat", bat.habitat),
+            _buildStatRow("Coloração", bat.coloration),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+  Widget _buildStatRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(label,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+          Text(value, style: TextStyle(fontSize: 16)),
+        ],
+      ),
+    );
+  }
+}
+
+void main() {
+  runApp(BatDexApp());
 }
