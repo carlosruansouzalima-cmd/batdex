@@ -8,15 +8,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:myapp/main.dart';
+import 'package:batdex/main.dart';
 
 void main() {
   testWidgets('BatDex app test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(BatDexApp());
+    await tester.pumpWidget(const BatDexApp());
 
     // Verify that the app title is displayed
-    expect(find.text('BatDex'), findsOneWidget);
+    expect(find.text('BatDex - Morcegos da Amazônia'), findsOneWidget);
 
     // Verify that we have a list of bats
     expect(find.byType(ListView), findsOneWidget);

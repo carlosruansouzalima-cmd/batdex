@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'map.dart';
 
 /// Modelo representando cada morcego da BatDex.
 class Bat {
@@ -160,8 +161,20 @@ class BatDexApp extends StatelessWidget {
       theme: ThemeData.dark(),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("BatDex - Morcegos da Amazônia"),
+          title: const Text("BatDex - Morcegos da Amazônia"),
           centerTitle: true,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.map),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const BatMap()),
+                );
+              },
+              tooltip: 'Ver mapa',
+            ),
+          ],
         ),
         body: ListView.builder(
           itemCount: batdex.length,
@@ -207,7 +220,21 @@ class BatDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(bat.name)),
+      appBar: AppBar(
+        title: Text(bat.name),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.map),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => BatMap(selectedBat: bat)),
+              );
+            },
+            tooltip: 'Ver no mapa',
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(

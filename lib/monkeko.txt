@@ -1,0 +1,381 @@
+
+
+UNIVERSIDADE NILTON LINS
+
+LICENCIATURA DE CIÊNCIAS BIOLÓGICAS 
+
+
+
+CARLOS RUAN DE SOUZA LIMA
+
+
+
+
+ESPÉCIES DE MORCEGOS POLINIZADORES E DISPERSORES EM MANAUS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MANAUS - AM
+
+2025
+CARLOS RUAN DE SOUZA LIMA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ESPÉCIES DE MORCEGOS POLINIZADORES E DISPERSORES EM MANAUS
+
+
+
+
+
+
+
+
+
+
+Artigo apresentado à Universidade Nilton Lins, como requisito parcial para conclusão do Curso Superior de Graduação em Licenciatura Plena em 
+Ciências Biológicas.
+
+Orientadora temática: 
+Profª. Dr. Zenia Marcia Rodriguez Chacón 
+Esp: Doutorado em biologia de água doce e pesca interior.
+
+Orientadora metodológica:
+Maria Simone Da Silva Rocha 
+Profª. Msc
+
+
+
+
+
+MANAUS - AM
+
+2025
+
+RESUMO 
+
+Este trabalho analisa a diversidade de espécies de morcegos polinizadores e dispersores em diferentes ambientes da cidade de Manaus, destacando seu papel ecológico e a influência da urbanização sobre essas populações. O estudo tem como objetivo identificar as principais espécies presentes na região, compreender suas funções ecológicas e discutir os desafios relacionados à catalogação e à conservação desses animais. A pesquisa caracteriza-se como qualitativa, exploratória e bibliográfica, fundamentada na análise de artigos científicos, livros, dissertações e relatórios técnicos disponíveis em bases acadêmicas e institucionais. Os resultados apontam que a Amazônia brasileira abriga 146 espécies de morcegos, com destaque para a família Phyllostomidae, essencial na polinização e dispersão de sementes. Em Manaus, espécies como Glossophaga soricina, Artibeus lituratus e Hsunycteris thomasi desempenham papéis vitais para a regeneração florestal e a manutenção da flora local. Entretanto, a urbanização e a fragmentação dos habitats representam ameaças significativas, interferindo nas interações mutualísticas e na dinâmica dos ecossistemas. Conclui-se que há lacunas no conhecimento sobre morcegos em ambientes urbanos amazônicos, reforçando a necessidade de pesquisas mais específicas que subsidiem estratégias de conservação e gestão ambiental.
+Palavras-chave: Chiroptera; polinização; dispersão de sementes; urbanização; Amazônia.
+
+
+
+
+
+
+
+
+
+
+ABSTRACT
+
+This study analyzes the diversity of pollinating and seed-dispersing bat species in different environments of Manaus, highlighting their ecological role and the influence of urbanization on these populations. The main objective is to identify the species present in the region, understand their ecological functions, and discuss the challenges related to cataloging and conserving these animals. The research is qualitative, exploratory, and bibliographic, based on the analysis of scientific articles, books, dissertations, and technical reports from academic and institutional databases. The results show that the Brazilian Amazon harbors 146 bat species, especially within the Phyllostomidae family, which is crucial for pollination and seed dispersal. In Manaus, species such as Glossophaga soricina, Artibeus lituratus, and Hsunycteris thomasi play vital roles in forest regeneration and flora maintenance. However, urbanization and habitat fragmentation pose significant threats, affecting mutualistic interactions and ecosystem dynamics. It is concluded that knowledge gaps remain regarding bats in Amazonian urban environments, emphasizing the need for more specific studies to support conservation and environmental management strategies.
+Keywords: Chiroptera; pollination; seed dispersal; urbanization; Amazon.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1 - INTRODUÇÃO
+Os morcegos (Ordem Chiroptera) desempenham papéis ecológicos fundamentais nos ecossistemas tropicais, sobretudo na Amazônia brasileira, onde atuam como polinizadores, dispersores de sementes e controladores naturais de populações de insetos. A Amazônia Legal abriga 146 espécies de morcegos, distribuídas em nove famílias e 64 gêneros, representando cerca de 15% da diversidade global do grupo (BERNARD; TAVARES; SAMPAIO, 2011). Em Manaus, a diversidade é notável, incluindo espécies como Glossophaga soricina, Artibeus lituratus e Hsunycteris thomasi, que desempenham funções essenciais para a regeneração florestal e a manutenção da flora local.
+Entretanto, a crescente urbanização de Manaus tem provocado impactos ambientais significativos, como o desmatamento, a impermeabilização do solo e a fragmentação dos habitats naturais. Essas alterações dificultam a regeneração ecológica e afetam diretamente o comportamento e a distribuição dos morcegos, comprometendo as interações mutualísticas entre plantas e polinizadores (MARZLUFF; EWING, 2001 apud HORIKAWA, 2021). A redução de áreas florestais contínuas e a poluição luminosa e sonora são fatores que influenciam negativamente a dinâmica populacional dessas espécies, ameaçando a biodiversidade regional e a prestação de serviços ecossistêmicos.
+Apesar da relevância desses animais, a catalogação das espécies de morcegos polinizadores e dispersores ainda enfrenta lacunas importantes. A escassez de dados sistematizados, a limitação de métodos de captura e identificação e a falta de especialistas tornam o conhecimento fragmentado, dificultando a formulação de estratégias de conservação eficazes (DA SILVA et al., 2024). Dessa forma, compreender como essas espécies estão distribuídas entre ambientes urbanos e florestais em Manaus é essencial para subsidiar ações de manejo e preservação.
+A relevância deste estudo reside na necessidade de ampliar o conhecimento científico sobre a fauna de morcegos amazônicos, especialmente em contextos urbanos pouco explorados. Além da contribuição acadêmica, o tema possui relevância social e ambiental, uma vez que os morcegos são agentes indispensáveis para a manutenção da biodiversidade e para a sustentabilidade de sistemas agrícolas, reduzindo a dependência de pesticidas e auxiliando na regeneração de ecossistemas.
+Nesse sentido, este trabalho tem como objetivo analisar a diversidade de espécies de morcegos polinizadores e dispersores na região de Manaus, destacando suas funções ecológicas e os desafios associados à sua catalogação. Busca-se, ainda, identificar as principais espécies registradas, compreender os impactos da urbanização sobre suas populações e discutir as lacunas existentes na literatura. Para tanto, a pesquisa adota uma abordagem qualitativa, exploratória e bibliográfica, fundamentada na revisão de artigos científicos, dissertações, teses e relatórios técnicos disponíveis em bases de dados nacionais e internacionais.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2 - FUNDAMENTAÇÃO TEÓRICA
+2.1 - Diversidade de morcegos polinizadores e dispersores em Manaus
+Os morcegos constituem a segunda maior ordem de mamíferos do planeta, com mais de 1.400 espécies descritas globalmente. Sua diversidade é marcada por diferentes adaptações morfológicas, fisiológicas e comportamentais, que permitem ocupar uma ampla variedade de nichos ecológicos (REIS et al., 2007). No Brasil, a Amazônia representa um dos principais centros de diversidade do grupo, abrigando cerca de 146 espécies distribuídas em nove famílias e 64 gêneros, das quais a família Phyllostomidae se destaca pela grande representatividade e pelo papel essencial na polinização e na dispersão de sementes (BERNARD; TAVARES; SAMPAIO, 2011).
+Na região de Manaus, espécies como Artibeus lituratus (morcego-das-frutas), Glossophaga soricina (morcego-beija-flor), Hsunycteris thomasi (morcego-néctar-de-Thomas) e Carollia perspicillata (morcego-de-cauda-curta) são frequentemente registradas tanto em áreas florestais quanto em ambientes urbanos (OLIVEIRA, 2016). Essas espécies desempenham papéis distintos: enquanto os frugívoros favorecem a regeneração de áreas degradadas pela dispersão de sementes, os nectarívoros contribuem para a polinização de plantas economicamente e ecologicamente importantes.
+Entretanto, a expansão urbana em Manaus tem modificado a composição das comunidades de morcegos. A poluição sonora e luminosa, bem como a fragmentação de habitats, reduzem a disponibilidade de recursos e podem alterar os padrões de atividade das espécies (THIEL et al., 2020). Essas alterações reforçam a necessidade de estudos que analisem como a urbanização influencia a distribuição e a abundância dos morcegos na região.
+2.2 - Métodos de identificação e catalogação de morcegos
+A correta identificação de morcegos é um dos maiores desafios para pesquisadores. Métodos tradicionais incluem o uso de redes de neblina, armadilhas de harp trap e análises morfológicas, nas quais se observam características cranianas, dentárias e corporais (CEVS, 2018). Embora amplamente utilizados, esses procedimentos apresentam limitações, como o estresse para os animais e a dificuldade em diferenciar espécies morfologicamente semelhantes.
+Nos últimos anos, métodos modernos têm se destacado, como a bioacústica, que analisa padrões de ecolocalização, e a genética molecular, que possibilita a identificação de espécies crípticas por meio do DNA (OLIVEIRA, 2016). Adicionalmente, o uso de câmeras infravermelhas tem permitido observar o comportamento dos morcegos em ambientes naturais de maneira não invasiva.
+Apesar dos avanços, persistem obstáculos importantes. O acesso a áreas de difícil locomoção, como copas de árvores ou cavernas, limita a coleta de dados. Além disso, o alto custo de equipamentos e a carência de especialistas em mastozoologia na Amazônia dificultam a realização de pesquisas sistemáticas. Esses fatores explicam, em parte, a escassez de informações detalhadas sobre os morcegos em ambientes urbanos amazônicos (DA SILVA et al., 2024).
+2.3 Papel ecológico dos morcegos na reprodução de plantas
+A interação entre morcegos e plantas configura um exemplo de mutualismo essencial para a manutenção dos ecossistemas tropicais. Morcegos frugívoros atuam como dispersores de sementes, promovendo a regeneração natural de áreas desmatadas e fragmentadas (UIEDA; VASCONCELLOS-NETO, 1984; MARINHO-FILHO, 1994). Já os nectarívoros, como Glossophaga soricina e Hsunycteris thomasi, são polinizadores de espécies vegetais de importância local, como o maracujá (Passiflora spp.) e o ingá (Inga spp.), cuja floração noturna coincide com os hábitos alimentares desses animais (MARTINS; GRIBEL, 2007).
+Além dos benefícios ecológicos diretos, os morcegos também influenciam processos econômicos. Estima-se que, ao controlar populações de insetos, os insetívoros contribuam para a redução do uso de pesticidas, beneficiando a agricultura e a saúde pública (THIEL et al., 2020). Contudo, a intensificação da urbanização, a poluição luminosa e o desmatamento comprometem essas interações, reduzindo a eficiência da polinização e da dispersão de sementes (VITOUSEK et al., 1997; SALA et al., 2000 apud THIEL et al., 2020).
+
+Assim, a perda de polinizadores noturnos representa não apenas um risco para a biodiversidade amazônica, mas também para a produção agrícola e para os serviços ecossistêmicos essenciais à manutenção da vida. Reconhecer a importância desses animais e compreender os fatores que ameaçam sua sobrevivência é um passo fundamental para o desenvolvimento de políticas públicas de conservação.
+3 - METODOLOGIA 
+Este trabalho caracteriza-se como uma pesquisa de natureza qualitativa, de caráter exploratório e fundamentada em levantamento bibliográfico. A abordagem qualitativa foi escolhida por possibilitar uma compreensão mais aprofundada das interações ecológicas dos morcegos polinizadores e dispersores, valorizando a interpretação de fenômenos descritos na literatura. O caráter exploratório justifica-se pelo fato de que a temática — diversidade de morcegos em ambientes urbanos de Manaus — ainda apresenta lacunas significativas de conhecimento, o que torna necessário um mapeamento preliminar das informações disponíveis (MARCONI; LAKATOS, 2003).
+A pesquisa bibliográfica foi conduzida a partir da análise de materiais já publicados, (colocar data de inclusão de ano) incluindo artigos científicos, livros, dissertações, teses e relatórios técnicos. Para garantir a atualidade e a relevância das fontes, a busca foi realizada em bases de dados acadêmicas amplamente reconhecidas, como SciELO, Google Acadêmico, CAPES Periódicos, PubMed, Web of Science e Scopus. Além disso, também foram consultados repositórios institucionais, com destaque para o Instituto Nacional de Pesquisas da Amazônia (INPA), o Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis (IBAMA) e o Instituto Chico Mendes de Conservação da Biodiversidade (ICMBio).
+Os critérios de seleção das fontes consideraram: (i) pertinência ao tema proposto, priorizando estudos sobre morcegos polinizadores e dispersores na Amazônia; (ii) recorte temporal, privilegiando publicações dos últimos vinte anos, sem desconsiderar trabalhos clássicos relevantes; e (iii) credibilidade dos autores e periódicos. A análise do material coletado foi realizada por meio de leitura crítica, categorização das informações e sistematização em eixos temáticos relacionados à diversidade de espécies, métodos de identificação e papel ecológico dos morcegos.
+Por se tratar de uma pesquisa baseada exclusivamente em fontes secundárias, não houve coleta de dados em campo ou experimentação com animais. Dessa forma, não se fez necessária a submissão ao Comitê de Ética em Pesquisa (CEP) nem ao Comitê de Ética no Uso de Animais (CEUA). Entretanto, foram respeitados todos os princípios éticos e acadêmicos, assegurando a citação adequada das fontes e a integridade do trabalho científico.
+4 - RESULTADOS E DISCUSSÃO ( Preliminar, pode haver atualizações )
+A presente pesquisa, de caráter bibliográfico, foi feita para identificar e sistematizar informações sobre a diversidade de espécies de morcegos polinizadores e dispersores registradas em Manaus e em seu entorno. Estudos prévios apontam que a região abriga espécies-chave como Glossophaga soricina, Hsunycteris thomasi, Artibeus lituratus e Carollia perspicillata, amplamente reconhecidas pelo papel que desempenham na polinização de plantas de importância ecológica e econômica, bem como na dispersão de sementes em áreas de floresta primária e secundária (MARTINS; GRIBEL, 2007; OLIVEIRA, 2016).
+Os resultados o indicam que a diversidade de morcegos em ambientes urbanos de Manaus tende a apresentar diferenças significativas em relação às áreas florestais contínuas. Essa diferenciação pode ocorrer devido à poluição luminosa e sonora, à redução da disponibilidade de recursos alimentares e à fragmentação de habitats. Dessa forma, em áreas mais antropizadas é provável que haja maior predominância de espécies generalistas e oportunistas, como Artibeus lituratus, em detrimento de espécies especialistas mais sensíveis às alterações ambientais (THIEL et al., 2020).
+Outro resultado esperado é a confirmação de que os morcegos nectarívoros mantêm interações estreitas com plantas de floração noturna, como Passiflora spp. e Inga spp., assegurando a reprodução dessas espécies vegetais. Essa relação reforça o papel dos morcegos como polinizadores noturnos e agentes indispensáveis para a manutenção da biodiversidade amazônica. Entretanto, a presença desses morcegos em áreas urbanizadas pode ser reduzida, o que comprometeria a polinização e, consequentemente, a regeneração de ecossistemas locais (DA SILVA et al., 2024).
+Além disso, espera-se identificar lacunas significativas na literatura, sobretudo em relação aos estudos direcionados a ambientes urbanos amazônicos. A maior parte dos trabalhos concentra-se em florestas primárias e secundárias, havendo poucos registros sobre a dinâmica das espécies em áreas densamente urbanizadas de Manaus. Essa escassez reforça a hipótese de que a falta de produção científica voltada a esses ambientes contribui para a manutenção de lacunas no conhecimento ecológico e dificulta a formulação de estratégias de conservação adaptadas à realidade urbana (VITOUSEK et al., 1997; SALA et al., 2000 apud THIEL et al., 2020).
+A discussão preliminar dos resultados evidencia que, ainda que haja informações consistentes sobre a diversidade de morcegos na Amazônia como um todo, o conhecimento sobre suas populações em ambientes urbanos permanece fragmentado. Isso demonstra a necessidade de novas pesquisas que explorem a ecologia urbana dos morcegos amazônicos, a fim de ampliar o entendimento sobre como esses animais se adaptam a paisagens modificadas e quais implicações essas adaptações trazem para a conservação da biodiversidade regional.
+
+Espécie 
+Dieta/Função
+Ambiente
+Plantas associadas
+Artibeus lituratus
+Frugívoro (dispersão de sementes)
+Urbano/Periurbano
+Ficus spp.
+Carollia perspicillata
+Frugívoro (dispersão – Piperaceae)
+Urbano/Periurbano
+Piperaceae
+Sturnira lilium
+Frugívoro (dispersão – Solanaceae)
+Urbano/Periurbano
+Solanaceae
+Platyrrhinus helleri
+Frugívoro generalista
+Urbano/Periurbano
+Diversas pioneiras
+Glossophaga soricina
+Nectarívoro (polinização)
+Urbano/Periurbano
+Passiflora spp., flores noturnas
+Artibeus obscurus
+Frugívoro de floresta
+Florestal
+Figueiras, espécies arbóreas
+Phyllostomus discolor
+Frugívoro/Nectarívoro oportunista
+Florestal
+Diversas frutíferas e flores
+Chiroderma villosum
+Frugívoro de floresta
+Florestal
+Frutos de florestas maduras
+Hsunycteris thomasi
+Nectarívoro (polinização especializada)
+Florestal
+Inga spp., flores tubulares
+Anoura caudifer
+Nectarívoro (polinização)
+Florestal
+Passiflora spp., flores noturnas
+Lonchophylla robusta
+Nectarívoro (polinização)
+Florestal
+Inga spp., flores especializadas
+
+
+
+
+Figura A: Artibeus lituratus
+Morcego das frutas
+
+Fonte: Roberto Leonan Morim Novaes, [ s.d ].
+Descrição: Morcego de grande porte. É o maior dos Artibeus, conseguindo comer frutos grandes e duros.
+
+Peso: 53 – 88 g;
+
+Envergadura:  Varia entre 32 a 33 cm; 
+
+Coloração: Marrom escura facilmente distinguível pelas listras brancas bem marcadas na parte superior da cabeça até o focinho. 
+
+Habitat: Habita desde ambientes conservados até centros urbanos.
+Figura B: Artibeus lituratus
+Morcego das frutas
+
+Fonte: Felipe Francisco Gomes da Silva, 07/08/2018.
+Alimentação: A base de sua alimentação é frutas, mas a espécie também consome néctar, pólen, folhas e insetos. Podendo contribuir não só na dispersão das sementes para manutenção das florestas, mas polinizar flores e controlar pragas.
+
+
+
+
+Figura A: Carollia Perspicillata
+ Morcego de cauda curta
+
+Fonte: Roberto Leonan Morim Novaes, [ s.d ].
+Descrição: Morcego desse gênero são pequeno a médio porte, com orelhas relativamente curtas e uma folha nasal curta e triangular. São muito difíceis de serem identificadas até o nível de espécie, pois muitas vezes a única diferença entre elas é o formato do crânio.
+Seu dimorfismo sexual varia de acordo com sua localização geográfica. Na Colômbia, não há diferenças de tamanho e cor entre os sexos, mas nas Índias Ocidentais as fêmeas são geralmente maiores, e os machos são maiores em todos os outros lugares onde esta espécie é encontrada.
+
+Peso: 10 – 23 g;
+
+Envergadura: Varia entre 28 a 30 cm;
+
+Coloração: Possuem pelos densos e macios, e podem ter várias cores, variando do preto ao marrom e cinza, além de morcegos albinos e alaranjados encontrados em certas áreas.
+Figura B: Carollia Perspicillata
+ Morcego de cauda curta
+
+Fonte: Roberto Leonan Morim Novaes, [ s.d ].
+
+Habitat:  É predominantemente florestal, incluindo florestas tropicais úmidas e secas (decíduas e perenes), mas também se adapta a áreas abertas como savanas e regiões urbanas. Geralmente encontrado perto de corpos de água, em altitudes abaixo de 1000 metros, ele utiliza ocos de árvores, fendas em rochas e construções humanas como locais para se abrigar. 
+
+Alimentação: É conhecido por comer uma grande variedade de frutas, com forte preferência pelo gênero Piper (Piperaceae), bem como néctar, pólen e insetos. É um morcego generalista, comendo uma grande variedade de frutas que se caracterizam por serem ricas em proteínas e pobres em fibras. Em épocas em que as frutas não são abundantes, complementam suas dietas com néctar e pólen das flores, o que também abre a possibilidade de serem polinizadores das flores que comem.
+
+
+
+
+
+Figura A: Sturnira lilium
+Morcego-fruteiro 
+
+Fonte: Roberto Leonan Morim Novaes, [ s.d ].
+Descrição: Morcego de médio porte, têm ainda orelhas pequenas e pontudas e uropatágio pouco desenvolvido
+
+Peso: Varia entre 15 – 25,5 g;
+ 
+Envergadura: 14 cm;
+
+Coloração: Possuem coloração pardo-amarelada. Alguns machos adultos possuem uma mancha alaranjada na região dos ombros. 
+
+Habitat: Habitam formações florestais úmidas e semi-áridas, assim como áreas urbanas e abertas.
+
+Alimentação: Alimenta-se principalmente de frutos, como exemplo sua preferência no gênero Solanum (Solanáceas), mas também pode se alimentar de pólen e néctar. Ajuda a dispersar sementes.
+Figura B: Sturnira lilium
+Morcego-fruteiro 
+Fonte: Joseane Derengoski, 12/09/2023.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5 - CONSIDERAÇÕES FINAIS 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+REFERÊNCIAS 
+BERNARD, E.; TAVARES, V. C.; SAMPAIO, E. Compilação atualizada das espécies de morcegos (Chiroptera) para a Amazônia Brasileira. Biota Neotropica, Campinas, v. 11, n. 1, p. 35-46, 2011. DOI: 10.1590/S1676-06032011000100003.
+
+BOCCATO, Vera Regina Cazetto. Metodologia da pesquisa bibliográfica na área odontológica e o artigo científico como forma de comunicação. Revista de Odontologia da Universidade Cidade de São Paulo, São Paulo, v. 18, n. 3, p. 265–274, 2006. Disponível em: ED18(2)2006_3.indd. Acesso em: 23 maio 2025. 
+
+CENTRO ESTADUAL DE VIGILÂNCIA EM SAÚDE (RS). Guia de manejo e controle de morcegos: técnicas de identificação, captura e coleta. 2. ed. Porto Alegre: CEVS/RS, 2018. 
+
+DA SILVA, Zeneide Damião; GURGEL, Ely Simone Cajueiro; CORREIA, Letícia Lima; VIEIRA, Thiago Bernardi. Dispersão de sementes por morcegos (Chiroptera: Phyllostomidae) e redes mutualísticas em uma paisagem dominada por cacau na Amazônia brasileira. Global Ecology and Conservation, v. 55, p. e03252, nov. 2024. Disponível em: https://doi.org/10.1016/j.gecco.2024.e03252. 
+
+HORIKAWA, Fernanda de Oliveira. Contato entre seres humanos e morcegos: uma abordagem de ecologia de paisagem. 2021. Trabalho de Conclusão de Curso (Graduação em Ciências Biológicas) - Faculdade de Ciências e Letras, Campus de Rio Claro, São Paulo, 2021.  Disponível em: Contato entre seres humanos e morcegos: uma abordagem de ecologia de paisagem. Acesso em: 29 mar 2025.
+
+MARINHO-FILHO, J.; VASCONCELLOS-NETO, J. Dispersão de sementes de Vismia cayennensis (Jacq.) Pers. (Guttiferae) por morcegos na região de Manaus, Amazonas. Acta Botanica Brasilica, v. 8, n. 1, p. 87–96, 1994. DOI: https://doi.org/10.1590/S0102-33061994000100009. 
+
+MARCONI, Marina de Andrade; LAKATOS, Eva Maria. Fundamentos de metodologia científica. 5. ed. São Paulo: Atlas, 2003. Disponível em: https://ria.ufrn.br/handle/123456789/1239. Acesso em: 23 maio 2025.
+
+MARTINS, C. F.; GRIBEL, R. Polinização de Caryocar villosum (Aubl.) Pers. (Caryocaraceae), uma árvore emergente da Amazônia Central. Revista Brasileira de Botânica, v. 30, n. 4, p. 605–612, 2007. DOI: https://doi.org/10.1590/S0100-84042007000400008.
+
+SILVA, Maria Nazareth Ferreira da et al. O acervo de morcegos (Chiroptera) da Coleção de Mamíferos do Instituto Nacional de Pesquisas da Amazônia: representatividade taxonômica, geográfica e histórico das coletas na Amazônia. Brazilian Journal of Mammalogy, [s. l.], n.e.90: e90202133, 2021. DOI: https://doi.org/10.32673/bjm.vie90.33.
+ 
+OLIVEIRA, Roberta Cunha de. Diversidade de espécies de morcegos (Mammalia: Chiroptera) na Amazônia brasileira. 2016. Tese (Mestrado em Genética, Conservação e Biologia Evolutiva) – Instituto Nacional de Pesquisas da Amazônia, Manaus, 2016. Disponível em: https://repositorio.inpa.gov.br/bitstream/1/37616/1/tese_inpa.pdf. Acesso em: 29 mar. 2025.
+
+PROGRAMA DE PESQUISA EM BIODIVERSIDADE (Brasil); INSTITUTO NACIONAL DE PESQUISAS DA AMAZÔNIA. Guia de identificação de morcegos da Amazônia. 3. ed. Manaus: INPA, 2020. Disponível em: 
+https://ppbio.inpa.gov.br/sites/default/files/guia-morcegos-v3_web.pdf. Acesso em: 29 mar. 2025. 
+
+REIS, Nélio Roberto dos; PERACCHI, Adriano Lúcio; PEDRO, Wagner André; LIMA, Isaac Passos (Orgs.). Morcegos do Brasil. Londrina: Universidade Estadual de Londrina; UNESP; FAPERJ, 2007. 253 p. ISBN 978-85-906395-1-0. Disponível em: repositorio.icmbio.gov.br. Acesso em: 29 mar. 2025.
+
+THIEL, S.; TSCHAPKA, M.; HEYMANN, E. W.; HEER, K. Estratificação vertical de comunidades de vertebrados dispersores de sementes e suas interações com plantas em florestas tropicais. Biological Reviews, v. 96, n. 2, p. 454–469, 2020. Disponível em: https://onlinelibrary.wiley.com/doi/full/10.1111/brv.12664.
+
+UIEDA, Wilson; VASCONCELLOS-NETO, João. Dispersão de Solanum spp. (Solanaceae) por morcegos, na região de Manaus, AM, Brasil. Revista Brasileira de Zoologia, v. 2, n. 7, p.. 449–458, 1984. DOI: https://doi.org/10.1590/S0101-81751984000300006.
+
+
+
+
+
+
