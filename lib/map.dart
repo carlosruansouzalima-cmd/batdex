@@ -134,8 +134,8 @@ class _BatMapState extends State<BatMap> {
                   final isSelected = widget.selectedBat?.name == entry.key;
                   return Marker(
                     point: entry.value,
-                    width: 60,
-                    height: 60,
+                    width: 100,
+                    height: 100,
                     child: GestureDetector(
                       onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -174,7 +174,7 @@ class _BatMapState extends State<BatMap> {
                               entry.key,
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 10,
+                                fontSize: 8,
                                 fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.center,
@@ -195,6 +195,8 @@ class _BatMapState extends State<BatMap> {
             right: 16,
             child: Column(
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              verticalDirection: VerticalDirection.down,
               children: [
                 FloatingActionButton(
                   onPressed: () {
@@ -204,7 +206,7 @@ class _BatMapState extends State<BatMap> {
                   tooltip: 'Aumentar zoom',
                   child: const Icon(Icons.add),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 0),
                 FloatingActionButton(
                   onPressed: () {
                     final currentZoom = mapController.zoom;
@@ -213,7 +215,7 @@ class _BatMapState extends State<BatMap> {
                   tooltip: 'Diminuir zoom',
                   child: const Icon(Icons.remove),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 0),
                 FloatingActionButton(
                   onPressed: _goToUserLocation,
                   tooltip: 'Localizar-me',
