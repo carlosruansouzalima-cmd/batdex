@@ -145,24 +145,45 @@ class _BatMapState extends State<BatMap> {
                           ),
                         );
                       },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: isSelected ? Colors.red : Colors.blue,
-                            width: 3,
+                      child: Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: isSelected ? Colors.red : Colors.blue,
+                                width: 3,
+                              ),
+                            ),
+                            child: ClipOval(
+                              child: Image.asset(
+                                batdex.firstWhere((bat) => bat.name == entry.key).imagePath,
+                                width: isSelected ? 70 : 60,
+                                height: isSelected ? 70 : 60,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
-                        ),
-                        child: ClipOval(
-                          child: Image.asset(
-                            batdex.firstWhere((bat) => bat.name == entry.key).imagePath,
-                            width: isSelected ? 70 : 60,
-                            height: isSelected ? 70 : 60,
-                            fit: BoxFit.cover,
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.7),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Text(
+                              entry.key,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ),
+                      ),
+                    
                   );
                 }).toList(),
               ),
@@ -172,10 +193,33 @@ class _BatMapState extends State<BatMap> {
           Positioned(
             bottom: 16,
             right: 16,
-            child: FloatingActionButton(
-              onPressed: _goToUserLocation,
-              tooltip: 'Localizar-me',
-              child: const Icon(Icons.my_location),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                FloatingActionButton(
+                  onPressed: () {
+                    final currentZoom = mapController.zoom;
+                    mapController.move(mapController.center, currentZoom + 1);
+                  },
+                  tooltip: 'Aumentar zoom',
+                  child: const Icon(Icons.add),
+                ),
+                const SizedBox(height: 8),
+                FloatingActionButton(
+                  onPressed: () {
+                    final currentZoom = mapController.zoom;
+                    mapController.move(mapController.center, currentZoom - 1);
+                  },
+                  tooltip: 'Diminuir zoom',
+                  child: const Icon(Icons.remove),
+                ),
+                const SizedBox(height: 8),
+                FloatingActionButton(
+                  onPressed: _goToUserLocation,
+                  tooltip: 'Localizar-me',
+                  child: const Icon(Icons.my_location),
+                ),
+              ],
             ),
           ),
         ],
