@@ -41,6 +41,14 @@ class _BatMapState extends State<BatMap> {
     'Anoura caudifer': LatLng(-3.0724, -60.0067),         // Jardim Botânico de Manaus (Área Leste)
   };
 
+  // Retorna uma cor única para cada morcego baseada em seu índice na `batdex`.
+  // Usa HSV para espalhar as cores ao redor da roda de matiz.
+  Color _colorForBat(String name) {
+    final index = batdex.indexWhere((b) => b.name == name);
+    final hue = (index >= 0 ? (index * 36) % 360 : 200).toDouble();
+    return HSVColor.fromAHSV(1.0, hue, 0.65, 0.9).toColor();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -133,47 +141,55 @@ class _BatMapState extends State<BatMap> {
               MarkerLayer(
                 markers: batLocations.entries.map((entry) {
                   final isSelected = widget.selectedBat?.name == entry.key;
+                  final imagePath = batdex.firstWhere((bat) => bat.name == entry.key).imagePath;
                   return Marker(
                     point: entry.value,
                     width: 90,
                     height: 90,
                     child: Draggable<String>(
-                      feedback: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: isSelected ? Colors.red : Colors.blue,
-                                width: 3,
+                      feedback: Material(
+                        color: Colors.transparent,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: isSelected ? Colors.red : _colorForBat(entry.key),
+                                  width: 3,
+                                ),
+                              ),
+                              child: ClipOval(
+                                child: Image.asset(
+                                  imagePath,
+                                  width: isSelected ? 60 : 50,
+                                  height: isSelected ? 60 : 50,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                            child: ClipOval(
-                              child: Image.asset(
-                                batdex.firstWhere((bat) => bat.name == entry.key).imagePath,
-                                width: isSelected ? 60 : 50,
-                                height: isSelected ? 60 : 50,
-                                fit: BoxFit.cover,
+                            const SizedBox(height: 4),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: isSelected
+                                    ? Colors.red.withOpacity(0.9)
+                                    : _colorForBat(entry.key).withOpacity(0.9),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Text(
+                                entry.key,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
                             ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.7),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: Text(
-                              entry.key,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 8,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       data: entry.key,
                       onDraggableCanceled: (velocity, offset) {
@@ -197,42 +213,46 @@ class _BatMapState extends State<BatMap> {
                           );
                         },
                         child: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: isSelected ? Colors.red : Colors.blue,
-                                width: 3,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: isSelected ? Colors.red : _colorForBat(entry.key),
+                                  width: 3,
+                                ),
+                              ),
+                              child: ClipOval(
+                                child: Image.asset(
+                                  imagePath,
+                                  width: isSelected ? 60 : 50,
+                                  height: isSelected ? 60 : 50,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                            child: ClipOval(
-                              child: Image.asset(
-                                batdex.firstWhere((bat) => bat.name == entry.key).imagePath,
-                                width: isSelected ? 60 : 50,
-                                height: isSelected ? 60 : 50,
-                                fit: BoxFit.cover,
+                            const SizedBox(height: 4),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: isSelected
+                                    ? Colors.red.withOpacity(0.9)
+                                    : _colorForBat(entry.key).withOpacity(0.9),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Text(
+                                entry.key,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
                             ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.7),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: Text(
-                              entry.key,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 8,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
                       ),
                     ),
                   );
