@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'map.dart';
+import 'main_screen.dart';
 
 /// Modelo representando cada morcego da BatDex.
 class Bat {
@@ -150,7 +150,7 @@ final List<Bat> batdex = [
   ),
 ];
 
-/// Tela inicial da BatDex
+/// Aplicação principal da BatDex
 class BatDexApp extends StatelessWidget {
   const BatDexApp({super.key});
 
@@ -159,128 +159,11 @@ class BatDexApp extends StatelessWidget {
     return MaterialApp(
       title: "BatDex",
       theme: ThemeData.dark(),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("BatDex - Morcegos da Amazônia"),
-          centerTitle: true,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.map),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const BatMap()),
-                );
-              },
-              tooltip: 'Ver mapa',
-            ),
-          ],
-        ),
-        body: ListView.builder(
-          itemCount: batdex.length,
-          itemBuilder: (context, index) {
-            final bat = batdex[index];
-            return Card(
-              color: Colors.grey[900],
-              child: ListTile(
-                leading: Image.asset(
-                  bat.imagePath,
-                  width: 50,
-                  height: 50,
-                  fit: BoxFit.cover,
-                ),
-                title: Text(
-                  bat.name,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text("Tipo: ${bat.types.join(', ')}"),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => BatDetailScreen(bat: bat),
-                    ),
-                  );
-                },
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-
-/// Tela de detalhes de cada morcego
-class BatDetailScreen extends StatelessWidget {
-  final Bat bat;
-
-  const BatDetailScreen({super.key, required this.bat});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(bat.name),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.map),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => BatMap(selectedBat: bat)),
-              );
-            },
-            tooltip: 'Ver no mapa',
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(bat.imagePath, height: 200),
-            SizedBox(height: 16),
-            Text(
-              bat.name,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            Text("Tipo(s): ${bat.types.join(', ')}"),
-            SizedBox(height: 16),
-            Text(
-              bat.description,
-              style: TextStyle(fontSize: 16),
-              textAlign: TextAlign.justify,
-            ),
-            SizedBox(height: 20),
-            Divider(color: Colors.grey),
-            SizedBox(height: 10),
-            _buildStatRow("Peso médio", bat.weight),
-            _buildStatRow("Envergadura", bat.wingspan),
-            _buildStatRow("Habitat", bat.habitat),
-            _buildStatRow("Coloração", bat.coloration),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildStatRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(label,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-          Text(value, style: TextStyle(fontSize: 16)),
-        ],
-      ),
+      home: const MainScreen(),
     );
   }
 }
 
 void main() {
-  runApp(BatDexApp());
+  runApp(const BatDexApp());
 }
