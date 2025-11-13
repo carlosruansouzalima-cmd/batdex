@@ -5,6 +5,7 @@ import 'main_screen.dart';
 class Bat {
   final int id;
   final String name;
+  final String commonName;
   final List<String> types;
   final String description;
   final String imagePath;
@@ -16,6 +17,7 @@ class Bat {
   Bat({
     required this.id,
     required this.name,
+    required this.commonName,
     required this.types,
     required this.description,
     required this.imagePath,
@@ -31,6 +33,7 @@ final List<Bat> batdex = [
   Bat(
     id: 1,
     name: "Artibeus lituratus",
+    commonName: "Morcego das frutas",
     types: ["Dispersor"],
     description:
         "Maior dos Artibeus, alimenta-se de frutos grandes como figos e goiabas. Também pode consumir néctar e insetos, auxiliando na regeneração de florestas.",
@@ -43,6 +46,7 @@ final List<Bat> batdex = [
   Bat(
     id: 2,
     name: "Carollia perspicillata",
+    commonName: "Morcego de cauda curta",
     types: ["Dispersor", "Polinizador"],
     description:
         "Generalista, alimenta-se principalmente de frutos do gênero Piper, mas também consome néctar e insetos. Resiliente em áreas urbanas e florestais.",
@@ -55,6 +59,7 @@ final List<Bat> batdex = [
   Bat(
     id: 3,
     name: "Sturnira lilium",
+    commonName: "Morcego-fruteiro",
     types: ["Dispersor"],
     description:
         "Especialista em frutos de Solanum. Machos possuem glândulas odoríferas nos ombros, usadas na reprodução.",
@@ -67,6 +72,7 @@ final List<Bat> batdex = [
   Bat(
     id: 4,
     name: "Platyrrhinus helleri",
+    commonName: "Morcego de Heller",
     types: ["Dispersor"],
     description:
         "Pequeno morcego de listras brancas na face e dorso. Constrói abrigos com folhas de palmeira.",
@@ -79,6 +85,7 @@ final List<Bat> batdex = [
   Bat(
     id: 5,
     name: "Glossophaga soricina",
+    commonName: "Morcego Beija-Flor",
     types: ["Polinizador"],
     description:
         "Conhecido como Morcego Beija-Flor, possui língua longa adaptada para o néctar. Importante polinizador de várias espécies vegetais tropicais.",
@@ -91,6 +98,7 @@ final List<Bat> batdex = [
   Bat(
     id: 6,
     name: "Artibeus obscurus",
+    commonName: "Morcego Frugívoro Escuro",
     types: ["Dispersor"],
     description:
         "Morcego frugívoro escuro, consome principalmente figos e frutos silvestres.",
@@ -103,6 +111,7 @@ final List<Bat> batdex = [
   Bat(
     id: 7,
     name: "Phyllostomus discolor",
+    commonName: "Morcego de Nariz de Lança Pálido",
     types: ["Polinizador", "Dispersor"],
     description:
         "Onívoro versátil, consome frutos, insetos, pólen e néctar. Vocalização complexa, comparável à de alguns primatas.",
@@ -115,6 +124,7 @@ final List<Bat> batdex = [
   Bat(
     id: 8,
     name: "Chiroderma villosum",
+    commonName: "Morcego dos Olhos Grandes Peludo",
     types: ["Dispersor"],
     description:
         "Granívoro e frugívoro, com olhos grandes. Vive em colônias pequenas e ajuda na dispersão de figos.",
@@ -127,6 +137,7 @@ final List<Bat> batdex = [
   Bat(
     id: 9,
     name: "Hsunycteris thomasi",
+    commonName: "Morcego Néctar de Thomas",
     types: ["Polinizador"],
     description:
         "Especializado em néctar, possui língua com papilas em forma de esponja. Também consome pequenos frutos e insetos.",
@@ -139,6 +150,7 @@ final List<Bat> batdex = [
   Bat(
     id: 10,
     name: "Anoura caudifer",
+    commonName: "Morcego focinhudo",
     types: ["Polinizador"],
     description:
         "Morcego focinhudo, alimenta-se de néctar de diversas espécies vegetais, além de pólen e insetos.",

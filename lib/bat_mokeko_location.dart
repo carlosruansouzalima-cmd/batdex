@@ -7,113 +7,121 @@ class BatLocations {
   /// Cada chave é o nome da espécie, cada valor é uma lista de coordenadas
   static final Map<String, List<LatLng>> locations = {
     'Artibeus lituratus': [
-      LatLng(-3.015000, -59.935000),
-      LatLng(-3.016100, -59.936700),
-      LatLng(-3.017200, -59.938400),
-      LatLng(-3.018300, -59.940100),
-      LatLng(-3.019400, -59.941800),
-      LatLng(-3.020500, -59.943500),
-      LatLng(-3.021600, -59.945200),
-      LatLng(-3.022700, -59.946900),
+      // Urbano/Periurbano - Ficus spp. (figueiras)
+      LatLng(-3.1319, -60.0217), // Centro - Praça São Sebastião
+      LatLng(-3.0527, -60.0256), // Parque do Mindu
+      LatLng(-3.0890, -60.0217), // Campus UFAM
+      LatLng(-3.0636, -60.0139), // Bosque da Ciência
+      LatLng(-3.1137, -60.0261), // Jardim Botânico
+      LatLng(-3.0590, -60.0148), // INPA
+      LatLng(-3.0895, -60.0580), // Ponta Negra (área verde)
+      LatLng(-3.0823, -60.0283), // Parque 10 de Novembro
     ],
 
     'Carollia perspicillata': [
-      LatLng(-3.021500, -59.942500),
-      LatLng(-3.022600, -59.944200),
-      LatLng(-3.023700, -59.945900),
-      LatLng(-3.024800, -59.947600),
-      LatLng(-3.025900, -59.949300),
-      LatLng(-3.027000, -59.951000),
-      LatLng(-3.028100, -59.952700),
-      LatLng(-3.029200, -59.954400),
+      // Urbano/Periurbano - Piperaceae (bordas de mata)
+      LatLng(-3.0510, -60.0265), // Parque do Mindu (lado oeste)
+      LatLng(-3.0625, -60.0125), // Bosque da Ciência (entrada)
+      LatLng(-3.1350, -60.0235), // Parque Sumaúma (norte)
+      LatLng(-3.0885, -60.0590), // Ponta Negra (praia)
+      LatLng(-3.0990, -60.0250), // Parque Cidade da Criança (sul)
+      LatLng(-3.0600, -60.0160), // INPA (trilha)
+      LatLng(-3.1300, -60.0230), // Centro (Av. 7 de Setembro)
+      LatLng(-3.0875, -60.0205), // UFAM (Faculdade de Ciências)
     ],
 
     'Sturnira lilium': [
-      LatLng(-3.028000, -59.950000),
-      LatLng(-3.029100, -59.951700),
-      LatLng(-3.030200, -59.953400),
-      LatLng(-3.031300, -59.955100),
-      LatLng(-3.032400, -59.956800),
-      LatLng(-3.033500, -59.958500),
-      LatLng(-3.034600, -59.960200),
-      LatLng(-3.035700, -59.961900),
+      // Urbano/Periurbano - Solanaceae
+      LatLng(-3.0545, -60.0245), // Parque do Mindu (leste)
+      LatLng(-3.0650, -60.0155), // Bosque da Ciência (centro)
+      LatLng(-3.1325, -60.0255), // Parque Sumaúma (sul)
+      LatLng(-3.0905, -60.0230), // UFAM (Instituto de Ciências Biológicas)
+      LatLng(-3.0965, -60.0275), // Parque Cidade da Criança (oeste)
+      LatLng(-3.0810, -60.0295), // Parque 10 (leste)
+      LatLng(-3.1125, -60.0245), // Jardim Botânico (trilha)
+      LatLng(-3.0880, -60.0595), // Ponta Negra (sul)
     ],
 
     'Platyrrhinus helleri': [
-      LatLng(-3.034500, -59.957500),
-      LatLng(-3.035600, -59.959200),
-      LatLng(-3.036700, -59.960900),
-      LatLng(-3.037800, -59.962600),
-      LatLng(-3.038900, -59.964300),
-      LatLng(-3.040000, -59.966000),
-      LatLng(-3.041100, -59.967700),
-      LatLng(-3.042200, -59.969400),
+      // Urbano/Periurbano - Frugívoro generalista (plantas pioneiras)
+      LatLng(-3.0515, -60.0240), // Parque do Mindu (sul)
+      LatLng(-3.0620, -60.0120), // Bosque da Ciência (oeste)
+      LatLng(-3.1360, -60.0260), // Parque Sumaúma (leste)
+      LatLng(-3.0955, -60.0240), // Parque Cidade da Criança (norte)
+      LatLng(-3.0870, -60.0195), // UFAM (Mini Campus)
+      LatLng(-3.0835, -60.0270), // Parque 10 (centro)
+      LatLng(-3.1335, -60.0200), // Centro (Largo de São Sebastião)
+      LatLng(-3.0910, -60.0565), // Ponta Negra (norte)
     ],
 
     'Glossophaga soricina': [
-      LatLng(-3.041000, -59.965000),
-      LatLng(-3.042100, -59.966700),
-      LatLng(-3.043200, -59.968400),
-      LatLng(-3.044300, -59.970100),
-      LatLng(-3.045400, -59.971800),
-      LatLng(-3.046500, -59.973500),
-      LatLng(-3.047600, -59.975200),
-      LatLng(-3.048700, -59.976900),
+      // Urbano/Periurbano - Nectarívoro (Passiflora spp., flores noturnas)
+      LatLng(-3.1120, -60.0275), // Jardim Botânico (orquidário)
+      LatLng(-3.0540, -60.0270), // Parque do Mindu (jardim sensorial)
+      LatLng(-3.0615, -60.0145), // Bosque da Ciência (viveiro)
+      LatLng(-3.1155, -60.0250), // Jardim Botânico (lago)
+      LatLng(-3.0880, -60.0235), // UFAM (jardim botânico)
+      LatLng(-3.0805, -60.0265), // Parque 10 (praça)
+      LatLng(-3.0870, -60.0600), // Ponta Negra (calçadão)
+      LatLng(-3.1315, -60.0265), // Parque Sumaúma (entrada)
     ],
 
     'Artibeus obscurus': [
-      LatLng(-3.047500, -59.972500),
-      LatLng(-3.048600, -59.974200),
-      LatLng(-3.049700, -59.975900),
-      LatLng(-3.050800, -59.977600),
-      LatLng(-3.051900, -59.979300),
-      LatLng(-3.053000, -59.981000),
-      LatLng(-3.054100, -59.982700),
-      LatLng(-3.055200, -59.984400),
+      // Florestal - Figueiras e espécies arbóreas
+      LatLng(-2.9550, -59.9715), // Reserva Ducke (trilha oeste)
+      LatLng(-2.9635, -59.9435), // Reserva Ducke (platô)
+      LatLng(-2.9455, -59.9315), // Reserva Ducke (baixio)
+      LatLng(-3.0535, -60.0248), // Parque do Mindu (mata ciliar)
+      LatLng(-3.0645, -60.0128), // Bosque da Ciência (mata preservada)
+      LatLng(-2.9385, -59.9665), // Reserva Ducke (vertente norte)
+      LatLng(-3.1345, -60.0238), // Parque Sumaúma (floresta secundária)
+      LatLng(-2.9515, -59.9250), // Reserva Ducke (torre)
     ],
 
     'Phyllostomus discolor': [
-      LatLng(-3.054000, -59.980000),
-      LatLng(-3.055100, -59.981700),
-      LatLng(-3.056200, -59.983400),
-      LatLng(-3.057300, -59.985100),
-      LatLng(-3.058400, -59.986800),
-      LatLng(-3.059500, -59.988500),
-      LatLng(-3.060600, -59.990200),
-      LatLng(-3.061700, -59.991900),
+      // Florestal - Frugívoro/Nectarívoro oportunista
+      LatLng(-2.9525, -59.9740), // Reserva Ducke (trilha leste)
+      LatLng(-3.0622, -60.0152), // Bosque da Ciência (interior)
+      LatLng(-2.9600, -59.9465), // Reserva Ducke (campinarana)
+      LatLng(-3.0508, -60.0262), // Parque do Mindu (borda florestal)
+      LatLng(-2.9490, -59.9285), // Reserva Ducke (igarapé)
+      LatLng(-3.1320, -60.0252), // Parque Sumaúma (dossel)
+      LatLng(-2.9415, -59.9635), // Reserva Ducke (transecto)
+      LatLng(-3.0575, -60.0135), // INPA (fragmento)
     ],
 
     'Chiroderma villosum': [
-      LatLng(-3.060500, -59.987500),
-      LatLng(-3.061600, -59.989200),
-      LatLng(-3.062700, -59.990900),
-      LatLng(-3.063800, -59.992600),
-      LatLng(-3.064900, -59.994300),
-      LatLng(-3.066000, -59.996000),
-      LatLng(-3.067100, -59.997700),
-      LatLng(-3.068200, -59.999400),
+      // Florestal - Frutos de florestas maduras
+      LatLng(-2.9560, -59.9700), // Reserva Ducke (floresta primária oeste)
+      LatLng(-2.9605, -59.9470), // Reserva Ducke (sub-bosque denso)
+      LatLng(-2.9445, -59.9330), // Reserva Ducke (vale)
+      LatLng(-3.0518, -60.0242), // Parque do Mindu (floresta madura)
+      LatLng(-2.9370, -59.9680), // Reserva Ducke (área núcleo)
+      LatLng(-3.0610, -60.0165), // Bosque da Ciência (área protegida)
+      LatLng(-2.9545, -59.9220), // Reserva Ducke (platô sul)
+      LatLng(-3.1355, -60.0228), // Parque Sumaúma (mata ciliar)
     ],
 
     'Hsunycteris thomasi': [
-      LatLng(-3.067000, -59.995000),
-      LatLng(-3.068100, -59.996700),
-      LatLng(-3.069200, -59.998400),
-      LatLng(-3.070300, -60.000100),
-      LatLng(-3.071400, -60.001800),
-      LatLng(-3.072500, -60.003500),
-      LatLng(-3.073600, -60.005200),
-      LatLng(-3.074700, -60.006900),
+      // Florestal - Nectarívoro especializado (Inga spp., flores tubulares)
+      LatLng(-2.9570, -59.9685), // Reserva Ducke (área de Inga)
+      LatLng(-2.9590, -59.9485), // Reserva Ducke (clareiras com Inga)
+      LatLng(-2.9430, -59.9345), // Reserva Ducke (baixio com leguminosas)
+      LatLng(-2.9360, -59.9695), // Reserva Ducke (floresta de igapó)
+      LatLng(-3.1110, -60.0280), // Jardim Botânico (coleção de Inga)
+      LatLng(-2.9505, -59.9265), // Reserva Ducke (área experimental)
     ],
 
     'Anoura caudifer': [
-      LatLng(-3.073500, -60.002500),
-      LatLng(-3.074600, -60.004200),
-      LatLng(-3.075700, -60.005900),
-      LatLng(-3.076800, -60.007600),
-      LatLng(-3.077900, -60.009300),
-      LatLng(-3.079000, -60.011000),
-      LatLng(-3.080100, -60.012700),
-      LatLng(-3.081200, -60.014400),
+      // Florestal - Nectarívoro (Passiflora spp., flores noturnas)
+      LatLng(-2.9580, -59.9670), // Reserva Ducke (trepadeiras)
+      LatLng(-2.9640, -59.9420), // Reserva Ducke (bordas com Passiflora)
+      LatLng(-2.9495, -59.9270), // Reserva Ducke (clareiras)
+      LatLng(-3.1165, -60.0240), // Jardim Botânico (área de lianas)
+      LatLng(-2.9425, -59.9620), // Reserva Ducke (transição)
+      LatLng(-3.0655, -60.0130), // Bosque da Ciência (trepadeiras)
+      LatLng(-2.9560, -59.9205), // Reserva Ducke (borda sul)
+      LatLng(-2.9350, -59.9710), // Reserva Ducke (área norte)
     ],
   };
 

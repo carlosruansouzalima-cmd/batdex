@@ -3,6 +3,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
 import 'main.dart';
+import 'main_screen.dart';
+import 'dart:math' as math;
 
 /// Painel do Mapa
 class BatMapPanel extends StatefulWidget {
@@ -10,6 +12,8 @@ class BatMapPanel extends StatefulWidget {
   final bool isDarkMode;
   final Color Function(String) colorForBat;
   final Function(String, LatLng) onLocationUpdated;
+  final MapVisualizationMode visualizationMode;
+  final bool useAdaptiveOffset;
 
   const BatMapPanel({
     super.key,
@@ -17,6 +21,8 @@ class BatMapPanel extends StatefulWidget {
     required this.isDarkMode,
     required this.colorForBat,
     required this.onLocationUpdated,
+    this.visualizationMode = MapVisualizationMode.individual,
+    this.useAdaptiveOffset = true,
   });
 
   @override
@@ -30,6 +36,37 @@ class _BatMapPanelState extends State<BatMapPanel> {
   void initState() {
     super.initState();
     _requestLocationPermission();
+  }
+
+  /// Aplica offset adaptativo para evitar sobreposição visual
+  /// Com agrupamento espacial inteligente
+  LatLng _applyAdaptiveOffset(LatLng original, int index, int totalAtLocation) {
+    if (!widget.useAdaptiveOffset || totalAtLocation <= 1) return original;
+
+    // Distribui em círculo ao redor do ponto original
+    // Raio aumenta com densidade para melhor espaçamento
+    final angle = (2 * math.pi * index) / totalAtLocation;
+    final radius = totalAtLocation <= 3 ? 0.0015 : 0.0025; // 150m ou 250m
+    
+    final latOffset = radius * math.cos(angle);
+    final lngOffset = radius * math.sin(angle);
+    
+    return LatLng(
+      original.latitude + latOffset,
+      original.longitude + lngOffset,
+    );
+  }
+
+  /// Calcula densidade em uma localização
+  int _calculateDensity(LatLng location) {
+    const threshold = 0.001; // ~100m
+    return widget.filteredEntries.where((entry) {
+      final distance = math.sqrt(
+        math.pow(entry.value.latitude - location.latitude, 2) +
+        math.pow(entry.value.longitude - location.longitude, 2)
+      );
+      return distance < threshold;
+    }).length;
   }
 
   Future<void> _requestLocationPermission() async {
@@ -74,12 +111,34 @@ class _BatMapPanelState extends State<BatMapPanel> {
 
   @override
   Widget build(BuildContext context) {
+    // Agrupa entradas por localização para aplicar offset
+    final Map<String, List<MapEntry<String, LatLng>>> locationGroups = {};
+    for (var entry in widget.filteredEntries) {
+      final key = '${entry.value.latitude.toStringAsFixed(4)},${entry.value.longitude.toStringAsFixed(4)}';
+      locationGroups.putIfAbsent(key, () => []);
+      locationGroups[key]!.add(entry);
+    }
+
+    // Aplica offset adaptativo se necessário
+    final List<MapEntry<String, LatLng>> processedEntries = [];
+    locationGroups.forEach((locationKey, entries) {
+      for (int i = 0; i < entries.length; i++) {
+        final entry = entries[i];
+        final adjustedLocation = _applyAdaptiveOffset(
+          entry.value,
+          i,
+          entries.length,
+        );
+        processedEntries.add(MapEntry(entry.key, adjustedLocation));
+      }
+    });
+
     return Stack(
       children: [
         FlutterMap(
           mapController: mapController,
           options: MapOptions(
-            initialCenter: const LatLng(-3.0448, -60.0228), // Manaus coordinates
+            initialCenter: const LatLng(-3.0448, -60.0228),
             initialZoom: 12,
           ),
           children: [
@@ -90,112 +149,78 @@ class _BatMapPanelState extends State<BatMapPanel> {
               userAgentPackageName: 'com.example.batdex',
             ),
             MarkerLayer(
-              markers: widget.filteredEntries.map((entry) {
+              markers: processedEntries.map((entry) {
                 final index = batdex.indexWhere((b) => b.name == entry.key);
                 final displayIndex = index >= 0 ? index + 1 : 0;
+                final density = _calculateDensity(entry.value);
+                
+                // Tamanho variável baseado no modo de visualização e densidade
+                // Reduzido em 65% para diminuir poluição visual
+                final double baseSize = widget.visualizationMode == MapVisualizationMode.density
+                    ? 50.0 + (density * 5.0)
+                    : 65.0;
+                final double circleSize = baseSize.clamp(50.0, 100.0);
+                final double centerSize = widget.visualizationMode == MapVisualizationMode.density
+                    ? 14.0 + (density * 1.5)
+                    : 18.0;
+                
                 return Marker(
                   point: entry.value,
-                  width: 120, // Aumentado para o mapa de calor
-                  height: 120,
-                  child: Draggable<String>(
-                    feedback: Material(
-                      color: Colors.transparent,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          // Círculo maior para o mapa de calor (feedback)
-                          Container(
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: widget.colorForBat(entry.key).withOpacity(0.3),
-                              border: Border.all(
-                                color: widget.colorForBat(entry.key),
-                                width: 2,
-                              ),
-                            ),
-                          ),
-                          // Centro com o index
-                          Container(
-                            width: 30,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              color: widget.colorForBat(entry.key),
-                              shape: BoxShape.circle,
-                              border: Border.all(color: Colors.white, width: 2),
-                            ),
-                            child: Center(
-                              child: Text(
-                                '$displayIndex',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    data: entry.key,
-                    onDraggableCanceled: (velocity, offset) {
-                      final RenderBox renderBox = context.findRenderObject() as RenderBox;
-                      final localPosition = renderBox.globalToLocal(offset);
-                      final latLng = mapController.pointToLatLng(CustomPoint(
-                        localPosition.dx,
-                        localPosition.dy,
-                      ));
-                      widget.onLocationUpdated(entry.key, latLng);
+                  width: circleSize + 20,
+                  height: circleSize + 20,
+                  child: GestureDetector(
+                    onTap: () {
+                      final infoText = widget.visualizationMode == MapVisualizationMode.density
+                          ? '${entry.key} (Densidade: $density)'
+                          : entry.key;
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(infoText),
+                          duration: const Duration(seconds: 2),
+                        ),
+                      );
                     },
-                    child: GestureDetector(
-                      onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(entry.key),
-                            duration: const Duration(seconds: 2),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        // Círculo maior com opacidade reduzida
+                        Container(
+                          width: circleSize,
+                          height: circleSize,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: widget.colorForBat(entry.key).withOpacity(
+                              widget.visualizationMode == MapVisualizationMode.density
+                                  ? 0.12 + (density * 0.03)
+                                  : 0.15
+                            ),
+                            border: Border.all(
+                              color: Colors.grey.withOpacity(0.3),
+                              width: 0.5,
+                            ),
                           ),
-                        );
-                      },
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          // Círculo maior para o mapa de calor (área de ocorrência estimada)
-                          Container(
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: widget.colorForBat(entry.key).withOpacity(0.2),
-                              border: Border.all(
-                                color: widget.colorForBat(entry.key),
-                                width: 1,
+                        ),
+                        // Centro com o index
+                        Container(
+                          width: centerSize,
+                          height: centerSize,
+                          decoration: BoxDecoration(
+                            color: widget.colorForBat(entry.key),
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.white, width: 1),
+                          ),
+                          child: Center(
+                            child: Text(
+                              '$displayIndex',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: (centerSize / 2.4).clamp(8.0, 12.0),
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                          // Centro com o index
-                          Container(
-                            width: 24,
-                            height: 24,
-                            decoration: BoxDecoration(
-                              color: widget.colorForBat(entry.key),
-                              shape: BoxShape.circle,
-                              border: Border.all(color: Colors.white, width: 1),
-                            ),
-                            child: Center(
-                              child: Text(
-                                '$displayIndex',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 );
@@ -205,11 +230,14 @@ class _BatMapPanelState extends State<BatMapPanel> {
         ),
         Positioned(
           bottom: 16,
+          left: 16,
+          child: _buildLegend(),
+        ),
+        Positioned(
+          bottom: 16,
           right: 16,
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            verticalDirection: VerticalDirection.down,
             children: [
               FloatingActionButton(
                 onPressed: () {
@@ -219,7 +247,7 @@ class _BatMapPanelState extends State<BatMapPanel> {
                 tooltip: 'Aumentar zoom',
                 child: const Icon(Icons.add),
               ),
-              const SizedBox(height: 0),
+              const SizedBox(height: 8),
               FloatingActionButton(
                 onPressed: () {
                   final currentZoom = mapController.zoom;
@@ -228,13 +256,89 @@ class _BatMapPanelState extends State<BatMapPanel> {
                 tooltip: 'Diminuir zoom',
                 child: const Icon(Icons.remove),
               ),
-              const SizedBox(height: 0),
+              const SizedBox(height: 8),
               FloatingActionButton(
                 onPressed: _goToUserLocation,
                 tooltip: 'Localizar-me',
                 child: const Icon(Icons.my_location),
               ),
             ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildLegend() {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.95),
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Legenda Ecológica',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+              color: Colors.black87,
+            ),
+          ),
+          const SizedBox(height: 8),
+          _buildLegendItem(Colors.red[400]!, '🍎 Dispersores de sementes'),
+          const SizedBox(height: 4),
+          const Padding(
+            padding: EdgeInsets.only(left: 20),
+            child: Text(
+              '(morcegos frugívoros)',
+              style: TextStyle(fontSize: 9, color: Colors.black54, fontStyle: FontStyle.italic),
+            ),
+          ),
+          const SizedBox(height: 6),
+          _buildLegendItem(Colors.blue[400]!, '🌸 Polinizadores'),
+          const SizedBox(height: 4),
+          const Padding(
+            padding: EdgeInsets.only(left: 20),
+            child: Text(
+              '(morcegos nectarívoros)',
+              style: TextStyle(fontSize: 9, color: Colors.black54, fontStyle: FontStyle.italic),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLegendItem(Color color, String label) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 14,
+          height: 14,
+          decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.white, width: 1),
+          ),
+        ),
+        const SizedBox(width: 6),
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 11,
+            color: Colors.black87,
           ),
         ),
       ],
