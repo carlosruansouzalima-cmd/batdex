@@ -5,13 +5,14 @@ import 'package:geolocator/geolocator.dart';
 import 'main.dart';
 import 'main_screen.dart';
 import 'dart:math' as math;
+import 'package:collection/collection.dart';
 
 /// Painel do Mapa
 class BatMapPanel extends StatefulWidget {
-  final Iterable<MapEntry<String, LatLng>> filteredEntries;
+  final Iterable<MapEntry<String, ({LatLng location, int index})>> filteredEntries;
   final bool isDarkMode;
   final Color Function(String) colorForBat;
-  final Function(String, LatLng) onLocationUpdated;
+  final Function(String, int, LatLng) onLocationUpdated;
   final MapVisualizationMode visualizationMode;
   final bool useAdaptiveOffset;
 
@@ -31,11 +32,28 @@ class BatMapPanel extends StatefulWidget {
 
 class _BatMapPanelState extends State<BatMapPanel> {
   final MapController mapController = MapController();
+  // Variáveis para controlar o arrasto do marcador
+  String? _draggedMarkerId; // Usa um ID único (especie + index)
+  
+  // Armazena as localizações localmente para uma atualização visual fluida
+  late List<MapEntry<String, ({LatLng location, int index})>> _localEntries;
+  MapCamera? _cameraOnDrag;
 
   @override
   void initState() {
     super.initState();
+    _localEntries = widget.filteredEntries.toList();
     _requestLocationPermission();
+  }
+
+  @override
+  void didUpdateWidget(covariant BatMapPanel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Atualiza as entradas locais sempre que o widget pai for reconstruído,
+    // mas apenas se não estivermos no meio de uma operação de arraste.
+    if (widget.filteredEntries != oldWidget.filteredEntries && _draggedMarkerId == null) {
+      _localEntries = widget.filteredEntries.toList();
+    }
   }
 
   /// Aplica offset adaptativo para evitar sobreposição visual
@@ -62,8 +80,8 @@ class _BatMapPanelState extends State<BatMapPanel> {
     const threshold = 0.001; // ~100m
     return widget.filteredEntries.where((entry) {
       final distance = math.sqrt(
-        math.pow(entry.value.latitude - location.latitude, 2) +
-        math.pow(entry.value.longitude - location.longitude, 2)
+        math.pow(entry.value.location.latitude - location.latitude, 2) +
+        math.pow(entry.value.location.longitude - location.longitude, 2)
       );
       return distance < threshold;
     }).length;
@@ -112,26 +130,34 @@ class _BatMapPanelState extends State<BatMapPanel> {
   @override
   Widget build(BuildContext context) {
     // Agrupa entradas por localização para aplicar offset
-    final Map<String, List<MapEntry<String, LatLng>>> locationGroups = {};
+    final Map<String, List<MapEntry<String, ({LatLng location, int index})>>> locationGroups = {};    
     for (var entry in widget.filteredEntries) {
-      final key = '${entry.value.latitude.toStringAsFixed(4)},${entry.value.longitude.toStringAsFixed(4)}';
+      final key = '${entry.value.location.latitude.toStringAsFixed(4)},${entry.value.location.longitude.toStringAsFixed(4)}';
       locationGroups.putIfAbsent(key, () => []);
       locationGroups[key]!.add(entry);
     }
 
     // Aplica offset adaptativo se necessário
-    final List<MapEntry<String, LatLng>> processedEntries = [];
-    locationGroups.forEach((locationKey, entries) {
+    // Se não estivermos arrastando, processa as entradas. Caso contrário, usa as locais.
+    final List<MapEntry<String, ({LatLng location, int index})>> processedEntries = [];
+    if (_draggedMarkerId == null) {
+      // Se não estiver arrastando, calcula os offsets
+      locationGroups.forEach((locationKey, entries) {
       for (int i = 0; i < entries.length; i++) {
         final entry = entries[i];
         final adjustedLocation = _applyAdaptiveOffset(
-          entry.value,
+          entry.value.location,
           i,
           entries.length,
         );
-        processedEntries.add(MapEntry(entry.key, adjustedLocation));
+        processedEntries.add(MapEntry(entry.key, (location: adjustedLocation, index: entry.value.index)));
       }
     });
+    }
+
+    // Usa a lista local durante o arraste para uma atualização fluida,
+    // ou a lista processada com offsets em estado normal.
+    final List<MapEntry<String, ({LatLng location, int index})>> displayEntries = _draggedMarkerId != null ? _localEntries : processedEntries;
 
     return Stack(
       children: [
@@ -149,89 +175,89 @@ class _BatMapPanelState extends State<BatMapPanel> {
               userAgentPackageName: 'com.example.batdex',
             ),
             MarkerLayer(
-              markers: processedEntries.map((entry) {
+              markers: displayEntries.map((entry) {
                 final index = batdex.indexWhere((b) => b.name == entry.key);
                 final displayIndex = index >= 0 ? index + 1 : 0;
-                final density = _calculateDensity(entry.value);
+                final density = _calculateDensity(entry.value.location);
                 
                 // Tamanho variável baseado no modo de visualização e densidade
                 // Reduzido em 65% para diminuir poluição visual
-                final double baseSize = widget.visualizationMode == MapVisualizationMode.density
-                    ? 50.0 + (density * 5.0)
-                    : 65.0;
-                final double circleSize = baseSize.clamp(50.0, 100.0);
-                final double centerSize = widget.visualizationMode == MapVisualizationMode.density
-                    ? 14.0 + (density * 1.5)
-                    : 18.0;
+                final double baseSize =
+                    widget.visualizationMode == MapVisualizationMode.density
+                        ? 60.0 + (density * 6.0)
+                        : 75.0;
+                final double circleSize = baseSize.clamp(60.0, 120.0);
+                final double centerSize =
+                    widget.visualizationMode == MapVisualizationMode.density
+                        ? 18.0 + (density * 2.0)
+                        : 22.0;
                 
                 return Marker(
-                  point: entry.value,
+                  point: entry.value.location,
                   width: circleSize + 20,
                   height: circleSize + 20,
-                  child: GestureDetector(
-                    onTap: () {
-                      final infoText = widget.visualizationMode == MapVisualizationMode.density
-                          ? '${entry.key} (Densidade: $density)'
-                          : entry.key;
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(infoText),
-                          duration: const Duration(seconds: 2),
-                        ),
-                      );
+                  child: Listener(
+                    onPointerDown: (event) {
+                      setState(() {
+                        // Identifica o marcador que está sendo arrastado
+                        _cameraOnDrag = mapController.camera; // Captura o estado no início
+                        _draggedMarkerId = '${entry.key}-${entry.value.index}';
+                        // Usa a lista de exibição atual como base para o arraste
+                        _localEntries = List.from(displayEntries);
+                      });
                     },
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        // Círculo maior com opacidade reduzida
-                        Container(
-                          width: circleSize,
-                          height: circleSize,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: widget.colorForBat(entry.key).withOpacity(
-                              widget.visualizationMode == MapVisualizationMode.density
-                                  ? 0.12 + (density * 0.03)
-                                  : 0.15
-                            ),
-                            border: Border.all(
-                              color: Colors.grey.withOpacity(0.3),
-                              width: 0.5,
-                            ),
+                    onPointerMove: (event) {
+                      // Usa o estado do mapa capturado no onPointerDown para estabilidade
+                      final currentCamera = _cameraOnDrag;
+                      if (_draggedMarkerId == '${entry.key}-${entry.value.index}' &&
+                          currentCamera != null) {
+                        // Converte a posição do cursor na tela para uma coordenada geográfica
+                        final newLatLng = currentCamera.pointToLatLng(math.Point(event.position.dx, event.position.dy));
+                        
+                        // Atualiza a posição visualmente no estado local, sem reconstruir a tela inteira
+                        setState(() {
+                          final entryIndex = _localEntries.indexWhere((e) =>
+                              e.key == entry.key && e.value.index == entry.value.index);
+                          if (entryIndex != -1) {
+                            _localEntries[entryIndex] = MapEntry(entry.key, (location: newLatLng, index: entry.value.index));
+                          }
+                        });
+                      }
+                    },
+                    onPointerUp: (event) {
+                      // Finaliza o arrasto e atualiza o estado principal
+                      final finalEntry = _localEntries.firstWhereOrNull((e) => e.key == entry.key && e.value.index == entry.value.index);
+                      if (finalEntry != null) {
+                        widget.onLocationUpdated(entry.key, entry.value.index, finalEntry.value.location);
+                      }
+
+                      setState(() {
+                        _draggedMarkerId = null;
+                        _cameraOnDrag = null;
+                      });
+                    },
+                    child: GestureDetector(
+                      onTap: () {
+                        final infoText = widget.visualizationMode == MapVisualizationMode.density
+                            ? '${entry.key} (Densidade: $density)'
+                            : entry.key;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(infoText),
+                            duration: const Duration(seconds: 2),
                           ),
-                        ),
-                        // Centro com o index
-                        Container(
-                          width: centerSize,
-                          height: centerSize,
-                          decoration: BoxDecoration(
-                            color: widget.colorForBat(entry.key),
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 1),
-                          ),
-                          child: Center(
-                            child: Text(
-                              '$displayIndex',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: (centerSize / 2.4).clamp(8.0, 12.0),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                        );
+                      },
+                      child: MouseRegion(
+                        cursor: SystemMouseCursors.grab,
+                        child: _buildMarkerContent(entry, displayIndex, density, circleSize, centerSize),
+                      ),
                     ),
                   ),
                 );
               }).toList(),
             ),
           ],
-        ),
-        Positioned(
-          bottom: 16,
-          left: 16,
-          child: _buildLegend(),
         ),
         Positioned(
           bottom: 16,
@@ -269,76 +295,52 @@ class _BatMapPanelState extends State<BatMapPanel> {
     );
   }
 
-  Widget _buildLegend() {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.95),
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Legenda Ecológica',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 12,
-              color: Colors.black87,
-            ),
-          ),
-          const SizedBox(height: 8),
-          _buildLegendItem(Colors.red[400]!, '🍎 Dispersores de sementes'),
-          const SizedBox(height: 4),
-          const Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Text(
-              '(morcegos frugívoros)',
-              style: TextStyle(fontSize: 9, color: Colors.black54, fontStyle: FontStyle.italic),
-            ),
-          ),
-          const SizedBox(height: 6),
-          _buildLegendItem(Colors.blue[400]!, '🌸 Polinizadores'),
-          const SizedBox(height: 4),
-          const Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Text(
-              '(morcegos nectarívoros)',
-              style: TextStyle(fontSize: 9, color: Colors.black54, fontStyle: FontStyle.italic),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLegendItem(Color color, String label) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
+  Widget _buildMarkerContent(MapEntry<String, ({LatLng location, int index})> entry, int displayIndex, int density, double circleSize, double centerSize) {
+    return Stack(
+      alignment: Alignment.center,
       children: [
+        // Círculo maior com opacidade reduzida
         Container(
-          width: 14,
-          height: 14,
+          width: circleSize,
+          height: circleSize,
           decoration: BoxDecoration(
-            color: color,
             shape: BoxShape.circle,
-            border: Border.all(color: Colors.white, width: 1),
+            color: widget.colorForBat(entry.key).withOpacity(
+              widget.visualizationMode == MapVisualizationMode.density
+                  ? 0.12 + (density * 0.03)
+                  : 0.15
+            ),
+            border: Border.all(
+              color: Colors.grey.withOpacity(0.3),
+              width: 0.5,
+            ),
           ),
         ),
-        const SizedBox(width: 6),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 11,
-            color: Colors.black87,
+        // Centro com o index
+        Container(
+          width: centerSize,
+          height: centerSize,
+          decoration: BoxDecoration(
+            color: widget.colorForBat(entry.key),
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.white, width: 1),
+            boxShadow: _draggedMarkerId == '${entry.key}-${entry.value.index}' ? [
+              BoxShadow(
+                color: widget.colorForBat(entry.key).withOpacity(0.8),
+                blurRadius: 10,
+                spreadRadius: 4,
+              )
+            ] : [],
+          ),
+          child: Center(
+            child: Text(
+              '$displayIndex',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: (centerSize / 2.2).clamp(9.0, 14.0),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
       ],

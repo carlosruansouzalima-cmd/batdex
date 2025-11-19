@@ -39,27 +39,17 @@ class BatDexPanel extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.all(16),
-            child: const Column(
-              children: [
-                Text(
-                  'BatDex',
-                  style: TextStyle(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Column(children: [
+              const Text(
+                'Lista de morcegos de Manaus',
+                textAlign: TextAlign.center,
+                style: TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  'Morcegos da Amazônia',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 11,
-                  ),
-                ),
-              ],
-            ),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+            ]),
           ),
           SwitchListTile(
             title: const Text('Mostrar todos no mapa', style: TextStyle(color: Colors.white, fontSize: 12)),

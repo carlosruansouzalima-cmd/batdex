@@ -26,14 +26,20 @@ class _MainScreenState extends State<MainScreen> {
   final Map<String, bool> speciesLayerVisibility = {};
   bool useAdaptiveOffset = true;
 
-  // Localizações dos morcegos usando a nova estrutura com múltiplas ocorrências
-  // Mantém compatibilidade com código existente através de getFlatLocations()
+  // As localizações agora são parte do estado para permitir modificações
+  late Map<String, List<LatLng>> _batLocations;
 
   @override
   void initState() {
     super.initState();
+    // Inicializa as localizações dos morcegos como um estado mutável,
+    // fazendo uma cópia profunda dos dados originais.
+    _batLocations = Map.from(BatLocations.locations.map(
+      (key, value) => MapEntry(key, List<LatLng>.from(value)),
+    ));
+
     // Inicializa todas as camadas como visíveis
-    for (var species in BatLocations.locations.keys) {
+    for (var species in _batLocations.keys) {
       speciesLayerVisibility[species] = true;
     }
   }
@@ -43,20 +49,20 @@ class _MainScreenState extends State<MainScreen> {
   // Dispersores (frugívoros) = tons quentes (vermelho, laranja, rosa, amarelo)
   Color _colorForBat(String name) {
     // Mapa de cores por função ecológica
-    final Map<String, Color> ecologicalColors = {
+    const Map<String, Color> ecologicalColors = {
       // Frugívoros dispersores - tons quentes
-      'Artibeus lituratus': const Color(0xFFE74C3C),        // Vermelho coral
-      'Artibeus obscurus': const Color(0xFFC0392B),         // Vermelho escuro
-      'Carollia perspicillata': const Color(0xFFE67E22),    // Laranja
-      'Sturnira lilium': const Color(0xFFF39C12),           // Amarelo-laranja
-      'Platyrrhinus helleri': const Color(0xFFD35400),      // Laranja queimado
-      'Phyllostomus discolor': const Color(0xFFE91E63),     // Rosa
-      'Chiroderma villosum': const Color(0xFF9B59B6),       // Roxo (frutas maduras)
+      'Artibeus lituratus': Color(0xFFE53935), // Vermelho Forte
+      'Artibeus obscurus': Color(0xFFD84315), // Laranja Escuro
+      'Carollia perspicillata': Color(0xFFEF6C00), // Laranja
+      'Sturnira lilium': Color(0xFFF9A825), // Amarelo
+      'Platyrrhinus helleri': Color(0xFFFF8F00), // Âmbar
+      'Phyllostomus discolor': Color(0xFFE57373), // Vermelho Claro
+      'Chiroderma villosum': Color(0xFFFFB300), // Amarelo Ouro
       
       // Nectarívoros polinizadores - tons frios
-      'Glossophaga soricina': const Color(0xFF3498DB),      // Azul
-      'Hsunycteris thomasi': const Color(0xFF2ECC71),       // Verde
-      'Anoura caudifer': const Color(0xFF1ABC9C),           // Ciano/turquesa
+      'Glossophaga soricina': Color(0xFF1E88E5), // Azul
+      'Hsunycteris thomasi': Color(0xFF43A047), // Verde
+      'Anoura caudifer': Color(0xFF00ACC1), // Ciano
     };
     
     return ecologicalColors[name] ?? const Color(0xFF95A5A6); // Cinza neutro para desconhecidos
@@ -79,12 +85,22 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
-  void _onLocationUpdated(String batName, LatLng newLocation) {
-    // Nota: Como agora temos múltiplas localizações por espécie,
-    // atualizamos apenas a primeira para manter compatibilidade
-    // Em uma versão futura, poderíamos permitir editar localizações específicas
+  // Atualiza a localização de um marcador específico
+  void _onLocationUpdated(String batName, int locationIndex, LatLng newLocation) {
     setState(() {
-      // Esta funcionalidade pode ser expandida no futuro para gerenciar múltiplas localizações
+      if (_batLocations.containsKey(batName) &&
+          locationIndex < _batLocations[batName]!.length) {
+        _batLocations[batName]![locationIndex] = newLocation;
+      }
+    });
+  }
+
+  // Reseta as localizações para os valores originais
+  void _resetLocations() {
+    setState(() {
+      _batLocations = Map.from(BatLocations.locations.map(
+        (key, value) => MapEntry(key, List<LatLng>.from(value)),
+      ));
     });
   }
 
@@ -117,7 +133,7 @@ class _MainScreenState extends State<MainScreen> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
-                ...BatLocations.locations.keys.map((species) {
+                ..._batLocations.keys.map((species) {
                   return CheckboxListTile(
                     title: Text(species),
                     secondary: Container(
@@ -169,6 +185,17 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                   ],
                 ),
+                const Divider(),
+                Center(
+                  child: TextButton.icon(
+                    onPressed: () {
+                      _resetLocations();
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.refresh, size: 18),
+                    label: const Text('Resetar Posições'),
+                  ),
+                ),
               ],
             ),
           ),
@@ -187,8 +214,8 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     // Filtra entradas baseado na seleção E visibilidade das camadas
     final baseEntries = showAll
-        ? BatLocations.getAllEntries()
-        : BatLocations.getFilteredEntries(selectedBats);
+        ? BatLocations.getAllEntries(_batLocations)
+        : BatLocations.getFilteredEntries(_batLocations, selectedBats);
     
     final filteredEntries = baseEntries.where((entry) => 
         speciesLayerVisibility[entry.key] ?? true

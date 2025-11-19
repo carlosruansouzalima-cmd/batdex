@@ -125,37 +125,26 @@ class BatLocations {
     ],
   };
 
-  /// Retorna todas as localizações como um mapa plano (nome -> coordenada)
-  /// Útil para compatibilidade com código existente
-  static Map<String, LatLng> getFlatLocations() {
-    final Map<String, LatLng> flat = {};
-    locations.forEach((species, coords) {
-      // Para cada espécie, adiciona apenas a primeira localização para compatibilidade
-      if (coords.isNotEmpty) {
-        flat[species] = coords.first;
-      }
-    });
-    return flat;
-  }
-
   /// Retorna todas as entradas de localização como pares espécie/coordenada
-  static Iterable<MapEntry<String, LatLng>> getAllEntries() {
-    final List<MapEntry<String, LatLng>> entries = [];
-    locations.forEach((species, coords) {
-      for (final coord in coords) {
-        entries.add(MapEntry(species, coord));
+  /// Cada entrada agora inclui o índice da localização para identificação única.
+  static Iterable<MapEntry<String, ({LatLng location, int index})>> getAllEntries(Map<String, List<LatLng>> currentLocations) {
+    final List<MapEntry<String, ({LatLng location, int index})>> entries = [];
+    currentLocations.forEach((species, coords) {
+      for (int i = 0; i < coords.length; i++) {
+        entries.add(MapEntry(species, (location: coords[i], index: i)));
       }
     });
     return entries;
   }
 
   /// Retorna entradas filtradas por espécies selecionadas
-  static Iterable<MapEntry<String, LatLng>> getFilteredEntries(Set<String> selectedSpecies) {
-    final List<MapEntry<String, LatLng>> entries = [];
-    locations.forEach((species, coords) {
+  static Iterable<MapEntry<String, ({LatLng location, int index})>> getFilteredEntries(
+      Map<String, List<LatLng>> currentLocations, Set<String> selectedSpecies) {
+    final List<MapEntry<String, ({LatLng location, int index})>> entries = [];
+    currentLocations.forEach((species, coords) {
       if (selectedSpecies.contains(species)) {
-        for (final coord in coords) {
-          entries.add(MapEntry(species, coord));
+        for (int i = 0; i < coords.length; i++) {
+          entries.add(MapEntry(species, (location: coords[i], index: i)));
         }
       }
     });
