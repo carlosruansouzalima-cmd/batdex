@@ -35,6 +35,7 @@ class BatDexPanel extends StatelessWidget {
     ).toList();
 
     final content = Container(
+      height: double.infinity,
       color: Colors.grey[900],
       child: Column(
         children: [
@@ -48,6 +49,21 @@ class BatDexPanel extends StatelessWidget {
                     color: Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Mostrar todos',
+                    style: TextStyle(color: Colors.white, fontSize: 12),
+                  ),
+                  Switch(
+                    value: showAll,
+                    onChanged: onShowAllChanged,
+                    activeColor: Colors.blue,
+                  ),
+                ],
               ),
             ]),
           ),

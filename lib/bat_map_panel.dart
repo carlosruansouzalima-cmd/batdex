@@ -45,6 +45,9 @@ class _BatMapPanelState extends State<BatMapPanel> {
   bool _isAddingMarker = false;
   String? _selectedSpeciesForAdd;
 
+  // Posição do mapa na tela para correção de coordenadas
+  Offset? _mapOffset;
+
   @override
   void initState() {
     super.initState();
@@ -212,8 +215,14 @@ class _BatMapPanelState extends State<BatMapPanel> {
                   point: entry.value.location,
                   width: circleSize + 20,
                   height: circleSize + 20,
-                  child: Listener(
-                    onPointerDown: (event) {
+                  child: GestureDetector(
+                    onPanStart: (details) {
+                      // Captura a posição do mapa na tela para correção de coordenadas
+                      final renderBox = context.findRenderObject() as RenderBox?;
+                      if (renderBox != null) {
+                        _mapOffset = renderBox.localToGlobal(Offset.zero);
+                      }
+                      
                       setState(() {
                         // Identifica o marcador que está sendo arrastado
                         _cameraOnDrag = mapController.camera; // Captura o estado no início
@@ -222,13 +231,14 @@ class _BatMapPanelState extends State<BatMapPanel> {
                         _localEntries = List.from(displayEntries);
                       });
                     },
-                    onPointerMove: (event) {
-                      // Usa o estado do mapa capturado no onPointerDown para estabilidade
+                    onPanUpdate: (details) {
+                      // Usa o estado do mapa capturado no onPanStart para estabilidade
                       final currentCamera = _cameraOnDrag;
                       if (_draggedMarkerId == '${entry.key}-${entry.value.index}' &&
-                          currentCamera != null) {
-                        // Converte a posição do cursor na tela para uma coordenada geográfica
-                        final newLatLng = currentCamera.pointToLatLng(math.Point(event.position.dx, event.position.dy));
+                          currentCamera != null && _mapOffset != null) {
+                        // Converte a posição global do mouse para coordenadas relativas ao mapa
+                        final relativePosition = details.globalPosition - _mapOffset!;
+                        final newLatLng = currentCamera.pointToLatLng(math.Point(relativePosition.dx, relativePosition.dy));
                         
                         // Atualiza a posição visualmente no estado local, sem reconstruir a tela inteira
                         setState(() {
@@ -240,7 +250,7 @@ class _BatMapPanelState extends State<BatMapPanel> {
                         });
                       }
                     },
-                    onPointerUp: (event) {
+                    onPanEnd: (details) {
                       // Finaliza o arrasto e atualiza o estado principal
                       final finalEntry = _localEntries.firstWhereOrNull((e) => e.key == entry.key && e.value.index == entry.value.index);
                       if (finalEntry != null) {
@@ -250,24 +260,12 @@ class _BatMapPanelState extends State<BatMapPanel> {
                       setState(() {
                         _draggedMarkerId = null;
                         _cameraOnDrag = null;
+                        _mapOffset = null;
                       });
                     },
-                    child: GestureDetector(
-                      onTap: () {
-                        final infoText = widget.visualizationMode == MapVisualizationMode.density
-                            ? '${entry.key} (Densidade: $density)'
-                            : entry.key;
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(infoText),
-                            duration: const Duration(seconds: 2),
-                          ),
-                        );
-                      },
-                      child: MouseRegion(
-                        cursor: SystemMouseCursors.grab,
-                        child: _buildMarkerContent(entry, displayIndex, density, circleSize, centerSize),
-                      ),
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.grab,
+                      child: _buildMarkerContent(entry, displayIndex, density, circleSize, centerSize),
                     ),
                   ),
                 );

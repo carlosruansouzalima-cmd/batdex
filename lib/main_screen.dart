@@ -384,12 +384,15 @@ class _MainScreenState extends State<MainScreen> {
             body: Row(
               children: [
                 // Painel esquerdo: BatDex
-                BatDexPanel(
-                  showAll: showAll,
-                  selectedBats: selectedBats,
-                  colorForBat: _colorForBat,
-                  onBatSelectionChanged: _onBatSelectionChanged,
-                  onShowAllChanged: _onShowAllChanged,
+                SizedBox(
+                  width: 350,
+                  child: BatDexPanel(
+                    showAll: showAll,
+                    selectedBats: selectedBats,
+                    colorForBat: _colorForBat,
+                    onBatSelectionChanged: _onBatSelectionChanged,
+                    onShowAllChanged: _onShowAllChanged,
+                  ),
                 ),
                 // Painel direito: Mapa
                 Expanded(
