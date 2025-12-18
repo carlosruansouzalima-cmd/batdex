@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 import 'bat_dex_panel.dart';
 import 'bat_map_panel.dart';
 import 'bat_mokeko_location.dart';
@@ -42,6 +44,33 @@ class _MainScreenState extends State<MainScreen> {
     for (var species in _batLocations.keys) {
       speciesLayerVisibility[species] = true;
     }
+
+    // Carrega localizações salvas
+    Future.microtask(() => _loadLocations());
+  }
+
+  Future<void> _loadLocations() async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonString = prefs.getString('bat_locations');
+    if (jsonString != null) {
+      final decoded = jsonDecode(jsonString) as Map<String, dynamic>;
+      setState(() {
+        _batLocations = decoded.map((key, value) => MapEntry(
+          key,
+          (value as List).map((item) => LatLng((item as Map)['lat'], (item as Map)['lng'])).toList(),
+        ));
+      });
+    }
+  }
+
+  Future<void> _saveLocations() async {
+    final prefs = await SharedPreferences.getInstance();
+    final locationsJson = _batLocations.map((key, value) => MapEntry(
+      key,
+      value.map((latlng) => {'lat': latlng.latitude, 'lng': latlng.longitude}).toList(),
+    ));
+    final jsonString = jsonEncode(locationsJson);
+    await prefs.setString('bat_locations', jsonString);
   }
 
   // Retorna uma cor única para cada morcego baseada em sua função ecológica
@@ -93,6 +122,7 @@ class _MainScreenState extends State<MainScreen> {
         _batLocations[batName]![locationIndex] = newLocation;
       }
     });
+    _saveLocations();
   }
 
   // Reseta as localizações para os valores originais
@@ -102,6 +132,7 @@ class _MainScreenState extends State<MainScreen> {
         (key, value) => MapEntry(key, List<LatLng>.from(value)),
       ));
     });
+    _saveLocations();
   }
 
   void _showLayerControl(BuildContext context) {
