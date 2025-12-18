@@ -135,6 +135,13 @@ class _MainScreenState extends State<MainScreen> {
     _saveLocations();
   }
 
+  void _onLocationAdded(String species, LatLng location) {
+    setState(() {
+      _batLocations[species]!.add(location);
+    });
+    _saveLocations();
+  }
+
   void _showLayerControl(BuildContext context) {
     showDialog(
       context: context,
@@ -304,6 +311,7 @@ class _MainScreenState extends State<MainScreen> {
               isDarkMode: isDarkMode,
               colorForBat: _colorForBat,
               onLocationUpdated: _onLocationUpdated,
+              onLocationAdded: _onLocationAdded,
               visualizationMode: visualizationMode,
               useAdaptiveOffset: useAdaptiveOffset,
             ),
@@ -390,6 +398,7 @@ class _MainScreenState extends State<MainScreen> {
                     isDarkMode: isDarkMode,
                     colorForBat: _colorForBat,
                     onLocationUpdated: _onLocationUpdated,
+                    onLocationAdded: _onLocationAdded,
                     visualizationMode: visualizationMode,
                     useAdaptiveOffset: useAdaptiveOffset,
                   ),

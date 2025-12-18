@@ -13,6 +13,7 @@ class BatMapPanel extends StatefulWidget {
   final bool isDarkMode;
   final Color Function(String) colorForBat;
   final Function(String, int, LatLng) onLocationUpdated;
+  final Function(String, LatLng) onLocationAdded;
   final MapVisualizationMode visualizationMode;
   final bool useAdaptiveOffset;
 
@@ -22,6 +23,7 @@ class BatMapPanel extends StatefulWidget {
     required this.isDarkMode,
     required this.colorForBat,
     required this.onLocationUpdated,
+    required this.onLocationAdded,
     this.visualizationMode = MapVisualizationMode.individual,
     this.useAdaptiveOffset = true,
   });
@@ -38,6 +40,10 @@ class _BatMapPanelState extends State<BatMapPanel> {
   // Armazena as localizações localmente para uma atualização visual fluida
   late List<MapEntry<String, ({LatLng location, int index})>> _localEntries;
   MapCamera? _cameraOnDrag;
+
+  // Modo para adicionar marcadores
+  bool _isAddingMarker = false;
+  String? _selectedSpeciesForAdd;
 
   @override
   void initState() {
@@ -127,6 +133,15 @@ class _BatMapPanelState extends State<BatMapPanel> {
     }
   }
 
+  void _addMarker(LatLng point) {
+    if (_selectedSpeciesForAdd != null && _selectedSpeciesForAdd!.isNotEmpty) {
+      widget.onLocationAdded(_selectedSpeciesForAdd!, point);
+      setState(() {
+        _isAddingMarker = false; // Desativa o modo após adicionar
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // Agrupa entradas por localização para aplicar offset
@@ -166,6 +181,7 @@ class _BatMapPanelState extends State<BatMapPanel> {
           options: MapOptions(
             initialCenter: const LatLng(-3.0448, -60.0228),
             initialZoom: 12,
+            onTap: _isAddingMarker ? (tapPosition, point) => _addMarker(point) : null,
           ),
           children: [
             TileLayer(
@@ -288,9 +304,56 @@ class _BatMapPanelState extends State<BatMapPanel> {
                 tooltip: 'Localizar-me',
                 child: const Icon(Icons.my_location),
               ),
+              const SizedBox(height: 8),
+              FloatingActionButton(
+                onPressed: () {
+                  setState(() {
+                    _isAddingMarker = !_isAddingMarker;
+                    if (!_isAddingMarker) _selectedSpeciesForAdd = null;
+                  });
+                },
+                tooltip: _isAddingMarker ? 'Cancelar adicionar' : 'Adicionar marcador',
+                backgroundColor: _isAddingMarker ? Colors.red : null,
+                child: Icon(_isAddingMarker ? Icons.cancel : Icons.add_location),
+              ),
             ],
           ),
         ),
+        if (_isAddingMarker)
+          Positioned(
+            top: 16,
+            left: 16,
+            right: 16,
+            child: Material(
+              elevation: 4,
+              borderRadius: BorderRadius.circular(8),
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                color: Colors.white,
+                child: Row(
+                  children: [
+                    const Text('Selecionar espécie:'),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: DropdownButton<String>(
+                        value: _selectedSpeciesForAdd,
+                        hint: const Text('Escolha uma espécie'),
+                        items: batdex.map((bat) => DropdownMenuItem(
+                          value: bat.name,
+                          child: Text(bat.name),
+                        )).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedSpeciesForAdd = value;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
       ],
     );
   }
