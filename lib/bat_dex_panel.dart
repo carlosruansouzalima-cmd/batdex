@@ -51,12 +51,6 @@ class BatDexPanel extends StatelessWidget {
               ),
             ]),
           ),
-          SwitchListTile(
-            title: const Text('Mostrar todos no mapa', style: TextStyle(color: Colors.white, fontSize: 12)),
-            value: showAll,
-            onChanged: onShowAllChanged,
-            activeThumbColor: Colors.blue,
-          ),
           const Divider(color: Colors.white24, height: 1),
           Expanded(
             child: ListView(

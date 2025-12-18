@@ -230,7 +230,7 @@ class _MainScreenState extends State<MainScreen> {
           return Scaffold(
             appBar: AppBar(
               title: const Text(
-                "Distribuição geográfica de morcegos dispersores e polinizadores - Manaus/AM",
+                "Figura 11 - Distribuição geográfica de morcegos dispersores e polinizadores - Manaus/AM",
                 style: TextStyle(fontSize: 14),
               ),
               centerTitle: true,
@@ -282,7 +282,7 @@ class _MainScreenState extends State<MainScreen> {
           return Scaffold(
             appBar: AppBar(
               title: const Text(
-                "Distribuição geográfica de morcegos dispersores e polinizadores da cidade de Manaus",
+                "Figura 11 - Distribuição geográfica de morcegos dispersores e polinizadores da cidade de Manaus",
                 style: TextStyle(fontSize: 15),
               ),
               centerTitle: true,

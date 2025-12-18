@@ -125,9 +125,9 @@ class BatLocations {
     ],
   };
 
-  /// Retorna todas as entradas de localização como pares espécie/coordenada
-  /// Cada entrada agora inclui o índice da localização para identificação única.
-  static Iterable<MapEntry<String, ({LatLng location, int index})>> getAllEntries(Map<String, List<LatLng>> currentLocations) {
+  /// Retorna todas as entradas, independentemente da seleção
+  static Iterable<MapEntry<String, ({LatLng location, int index})>> getAllEntries(
+      Map<String, List<LatLng>> currentLocations) {
     final List<MapEntry<String, ({LatLng location, int index})>> entries = [];
     currentLocations.forEach((species, coords) {
       for (int i = 0; i < coords.length; i++) {
